@@ -6,6 +6,23 @@ import { CircleCheck, Info, LoaderCircle, Send } from "lucide-react";
 import { categories, programmesIn } from "@/data/programmes";
 import { involvementPaths } from "@/data/navigation";
 import { cn } from "@/lib/utils";
+import { SelectMenu, type SelectGroup } from "./SelectMenu";
+
+const worldDot: Record<string, string> = { shore: "bg-coral", surface: "bg-cyan", reef: "bg-biolum", blue: "bg-violet" };
+
+/** Options for the "Interest / programme" picker. */
+const interestGroups: SelectGroup[] = [
+  {
+    label: "Get involved",
+    dot: "bg-ocean",
+    options: [...involvementPaths.map((p) => ({ value: p.id, label: p.title })), { value: "general", label: "General enquiry" }],
+  },
+  ...categories.map((c) => ({
+    label: `Programmes — ${c.filterLabel}`,
+    dot: worldDot[c.id],
+    options: programmesIn(c.id).map((p) => ({ value: p.number, label: p.title, prefix: p.number })),
+  })),
+];
 
 /**
  * Enquiry form. If NEXT_PUBLIC_ENQUIRY_ENDPOINT is set, submissions are POSTed
@@ -62,6 +79,12 @@ export function EnquiryForm({ defaultInterest = "", className }: { defaultIntere
   const blur = (k: keyof Fields) => () => {
     setTouched((t) => ({ ...t, [k]: true }));
     setErrors(validate(fields));
+  };
+  const setInterest = (v: string) => {
+    const next = { ...fields, interest: v };
+    setFields(next);
+    setErrors(validate(next));
+    setTouched((t) => ({ ...t, interest: true }));
   };
 
   async function onSubmit(ev: React.FormEvent<HTMLFormElement>) {
@@ -141,7 +164,7 @@ export function EnquiryForm({ defaultInterest = "", className }: { defaultIntere
   }
 
   const inputBase =
-    "mt-2 block w-full border border-line bg-white px-4 py-3 text-base text-ink transition-colors placeholder:text-muted/60 focus:border-brand focus:outline-none focus:ring-1 focus:ring-brand";
+    "mt-2 block w-full rounded-2xl border border-line bg-white px-4 py-3 text-base text-ink transition-[border-color,box-shadow] duration-200 placeholder:text-muted/60 hover:border-ink/25 focus:border-brand focus:outline-none focus:ring-4 focus:ring-brand/10";
 
   return (
     <form noValidate onSubmit={onSubmit} className={cn("border border-line bg-white p-6 sm:p-8 md:p-10", className)}>
@@ -207,35 +230,16 @@ export function EnquiryForm({ defaultInterest = "", className }: { defaultIntere
           />
         </Field>
         <Field id={id("interest")} label="Interest / programme" required error={show("interest")} className="sm:col-span-2">
-          <select
+          <SelectMenu
             id={id("interest")}
             name="interest"
             value={fields.interest}
-            onChange={update("interest")}
+            onChange={setInterest}
             onBlur={blur("interest")}
-            aria-invalid={!!show("interest")}
-            aria-describedby={show("interest") ? `${id("interest")}-err` : undefined}
-            className={cn(inputBase, "appearance-none bg-[url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%231c2a31%22 stroke-width=%222%22><path d=%22m6 9 6 6 6-6%22/></svg>')] bg-size-[1.1rem] bg-position-[right_1rem_center] bg-no-repeat pr-12", show("interest") && "ring-2 ring-red-500/70")}
-          >
-            <option value="">Choose one…</option>
-            <optgroup label="Get involved">
-              {involvementPaths.map((p) => (
-                <option key={p.id} value={p.id}>
-                  {p.title}
-                </option>
-              ))}
-              <option value="general">General enquiry</option>
-            </optgroup>
-            {categories.map((c) => (
-              <optgroup key={c.id} label={`Programmes — ${c.filterLabel}`}>
-                {programmesIn(c.id).map((p) => (
-                  <option key={p.number} value={p.number}>
-                    {p.number} · {p.title}
-                  </option>
-                ))}
-              </optgroup>
-            ))}
-          </select>
+            groups={interestGroups}
+            invalid={!!show("interest")}
+            describedBy={show("interest") ? `${id("interest")}-err` : undefined}
+          />
         </Field>
         <Field id={id("message")} label="Message" required error={show("message")} className="sm:col-span-2">
           <textarea

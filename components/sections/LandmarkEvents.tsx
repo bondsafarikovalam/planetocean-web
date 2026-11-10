@@ -1,9 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useLayoutEffect, useRef, useState } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useEffect, useRef, useState } from "react";
 import { eventsIntro, landmarkEvents } from "@/data/events";
 import { MaskReveal, Reveal } from "@/components/animations/Reveal";
 import { TextReveal } from "@/components/animations/TextReveal";
@@ -11,8 +9,7 @@ import { ButtonLink } from "@/components/ui/Button";
 import { PhotoNote } from "@/components/ui/PhotoNote";
 import { cn } from "@/lib/utils";
 import { SCROLL_MOTION_QUERY } from "@/lib/useMedia";
-
-if (typeof window !== "undefined") gsap.registerPlugin(ScrollTrigger);
+import { getLenis } from "@/lib/smoothScroll";
 
 const labelStyle = (label: string) => (label === "India's first" ? "bg-coral text-abyss" : "bg-cyan text-abyss");
 
@@ -20,20 +17,47 @@ const labelStyle = (label: string) => (label === "India's first" ? "bg-coral tex
  * Section 06 — "Firsts, held beneath the surface."
  * Pinned stage on every screen size; each event opens through an expanding porthole while titles crossfade.
  * Reduced motion: stacked editorial panels.
+ *
+ * Performance: GSAP + ScrollTrigger (~45 KB gz, plus pin/refresh layout work) are
+ * imported only when this section comes within ~1.5 viewports, so they never run
+ * during page load. Until then events 2–3 are hidden by plain inline styles.
  */
 export function LandmarkEvents({ showHeader = true, showLink = true }: { showHeader?: boolean; showLink?: boolean }) {
+  const section = useRef<HTMLElement>(null);
   const stage = useRef<HTMLDivElement>(null);
   const [pinned, setPinned] = useState(false);
+  const [near, setNear] = useState(false);
   const [active, setActive] = useState(0);
 
-  useLayoutEffect(() => {
-    const mm = gsap.matchMedia();
-    mm.add(SCROLL_MOTION_QUERY, () => setPinned(true));
-    return () => mm.revert();
+  // Pinned stage only when motion is allowed (tracks the OS setting live).
+  useEffect(() => {
+    const mq = window.matchMedia(SCROLL_MOTION_QUERY);
+    const on = () => setPinned(mq.matches);
+    on();
+    mq.addEventListener("change", on);
+    return () => mq.removeEventListener("change", on);
   }, []);
 
-  useLayoutEffect(() => {
-    if (!pinned || !stage.current) return;
+  // Start loading GSAP once the section is about 1.5 viewports away.
+  useEffect(() => {
+    if (!pinned || near || !section.current) return;
+    const io = new IntersectionObserver(([e]) => e.isIntersecting && setNear(true), { rootMargin: "150% 0px" });
+    io.observe(section.current);
+    return () => io.disconnect();
+  }, [pinned, near]);
+
+  useEffect(() => {
+    if (!pinned || !near || !stage.current) return;
+    let cancelled = false;
+    let teardown: (() => void) | undefined;
+
+    (async () => {
+      const [{ gsap }, { ScrollTrigger }] = await Promise.all([import("gsap"), import("gsap/ScrollTrigger")]);
+      if (cancelled || !stage.current) return;
+      gsap.registerPlugin(ScrollTrigger);
+      // Keep ScrollTrigger in step with Lenis' smoothed scroll (native scroll events still work without it).
+      const offLenis = getLenis()?.on("scroll", ScrollTrigger.update);
+
     const ctx = gsap.context(() => {
       const imgs = gsap.utils.toArray<HTMLElement>("[data-ev-img]");
       const texts = gsap.utils.toArray<HTMLElement>("[data-ev-text]");
@@ -69,11 +93,35 @@ export function LandmarkEvents({ showHeader = true, showLink = true }: { showHea
       });
       tl.to({}, { duration: 0.3 });
     }, stage);
-    return () => ctx.revert();
-  }, [pinned]);
+      // Sections above use content-visibility, so their real height can arrive later;
+      // re-measure pin positions whenever the page height changes (debounced).
+      let t: number | undefined;
+      let lastH = document.body.scrollHeight;
+      const ro = new ResizeObserver(() => {
+        const h = document.body.scrollHeight;
+        if (Math.abs(h - lastH) < 2) return;
+        lastH = h;
+        window.clearTimeout(t);
+        t = window.setTimeout(() => ScrollTrigger.refresh(), 200);
+      });
+      ro.observe(document.body);
+
+      teardown = () => {
+        ro.disconnect();
+        window.clearTimeout(t);
+        offLenis?.();
+        ctx.revert();
+      };
+    })();
+
+    return () => {
+      cancelled = true;
+      teardown?.();
+    };
+  }, [pinned, near]);
 
   return (
-    <section aria-labelledby={showHeader ? "events-title" : undefined} aria-label={showHeader ? undefined : "The three landmark events"} className="relative bg-abyss text-white">
+    <section ref={section} aria-labelledby={showHeader ? "events-title" : undefined} aria-label={showHeader ? undefined : "The three landmark events"} className="relative bg-abyss text-white">
       {showHeader && (
         <div className="grain relative overflow-hidden pb-16 pt-24 md:pb-24 md:pt-36">
           <div aria-hidden className="absolute -left-40 top-0 size-[40rem] animate-orb rounded-full bg-violet/30 orb-soft" />
@@ -92,18 +140,19 @@ export function LandmarkEvents({ showHeader = true, showLink = true }: { showHea
       {pinned ? (
         <div ref={stage} className="relative h-[100svh] overflow-hidden">
           {landmarkEvents.map((e, i) => (
-            <div key={e.id} data-ev-img className="absolute inset-0" style={{ zIndex: i }}>
+            <div key={e.id} data-ev-img className="absolute inset-0" style={{ zIndex: i, clipPath: i ? "circle(0% at 70% 50%)" : undefined }}>
               <Image src={e.image} alt={e.imageAlt} fill sizes="100vw" className="object-cover" />
               <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-abyss via-abyss/70 to-abyss/20 lg:bg-gradient-to-r lg:to-abyss/10" />
               <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-abyss/80 via-transparent to-abyss/40" />
             </div>
           ))}
 
-          {landmarkEvents.map((e) => (
+          {landmarkEvents.map((e, i) => (
             <p
               key={e.id}
               data-ev-ghost
               aria-hidden
+              style={i ? { opacity: 0, visibility: "hidden" } : undefined}
               className="text-outline pointer-events-none absolute right-[4vw] top-[14svh] z-10 select-none whitespace-nowrap text-right font-display text-[17vw] lg:text-[9vw] font-extrabold uppercase leading-[0.85] tracking-[-0.04em] text-biolum/30"
             >
               {e.label.split(" ")[0]}
@@ -115,7 +164,7 @@ export function LandmarkEvents({ showHeader = true, showLink = true }: { showHea
           <div className="container-x relative z-20 flex h-full items-end pb-24 lg:pb-[12vh]">
             <div className="relative h-[58svh] w-full max-w-2xl lg:h-[46vh]">
               {landmarkEvents.map((e, i) => (
-                <article key={e.id} id={e.id} data-ev-text className="absolute inset-x-0 bottom-0">
+                <article key={e.id} id={e.id} data-ev-text className="absolute inset-x-0 bottom-0" style={i ? { opacity: 0, visibility: "hidden" } : undefined}>
                   <p className={cn("inline-flex rounded-full px-4 py-2 font-mono text-xs uppercase tracking-[0.18em]", labelStyle(e.label))}>{e.label}</p>
                   <h3 className="display-lg mt-5 lg:mt-6">
                     <span className="sr-only">{e.label}: </span>
@@ -131,7 +180,7 @@ export function LandmarkEvents({ showHeader = true, showLink = true }: { showHea
           </div>
 
           <div aria-hidden className="absolute inset-x-5 bottom-8 z-20 flex items-center justify-end gap-4 sm:inset-x-auto sm:right-8 lg:bottom-10 lg:right-[3.5rem]">
-            <PhotoNote className="hidden sm:inline-flex">Representative imagery</PhotoNote>
+            {!landmarkEvents[active].eventPhoto && <PhotoNote className="hidden sm:inline-flex">Representative imagery</PhotoNote>}
             <div className="flex gap-2">
               {landmarkEvents.map((e, i) => (
                 <span key={e.id} className="relative h-1 w-10 overflow-hidden sm:w-14 rounded-full bg-white/20">
@@ -151,7 +200,7 @@ export function LandmarkEvents({ showHeader = true, showLink = true }: { showHea
                     <Image src={e.image} alt={e.imageAlt} fill sizes="(min-width: 768px) 55vw, 100vw" className="object-cover" />
                     <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-abyss/70 to-transparent" />
                   </MaskReveal>
-                  <PhotoNote className="absolute bottom-4 left-4">Representative image</PhotoNote>
+                  {!e.eventPhoto && <PhotoNote className="absolute bottom-4 left-4">Representative image</PhotoNote>}
                   <span aria-hidden className="text-outline absolute -top-8 right-4 font-display text-8xl font-extrabold text-biolum/40">
                     0{i + 1}
                   </span>

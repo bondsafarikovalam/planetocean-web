@@ -9,19 +9,16 @@ import { SmoothScroll } from "@/components/layout/SmoothScroll";
 import { site } from "@/lib/site";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
-const jakarta = Plus_Jakarta_Sans({
-  subsets: ["latin"],
-  variable: "--font-jakarta",
-  display: "swap",
-  weight: ["400", "500", "600", "700", "800"],
-});
-const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono-face", display: "swap", weight: ["400", "500"] });
+// All four families are variable fonts: omitting `weight` ships one file per family
+// instead of one per weight. Mono (small labels) and Malayalam aren't needed for
+// first paint, so they aren't preloaded.
+const jakarta = Plus_Jakarta_Sans({ subsets: ["latin"], variable: "--font-jakarta", display: "swap" });
+const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono-face", display: "swap", preload: false });
 const malayalam = Noto_Sans_Malayalam({
   subsets: ["malayalam"],
   variable: "--font-malayalam",
   display: "swap",
   preload: false,
-  weight: ["400", "500", "600"],
 });
 
 export const metadata: Metadata = {

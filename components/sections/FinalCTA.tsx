@@ -28,7 +28,7 @@ export function FinalCTA({
   const imgScale = useTransform(scrollYProgress, [0, 1], reduce ? [1, 1] : [1.3, 1.05]);
 
   return (
-    <section ref={ref} aria-labelledby="cta-title" className="relative isolate overflow-hidden bg-pearl">
+    <section ref={ref} aria-labelledby="cta-title" className="cv-auto relative isolate overflow-hidden bg-pearl">
       <motion.div style={{ clipPath: clip }} className="relative isolate overflow-hidden bg-abyss py-28 text-white md:py-52">
         <motion.div aria-hidden style={{ scale: imgScale }} className="absolute inset-0 -z-20">
           <Image src="/images/final-cta-horizon.jpg" alt="" fill sizes="100vw" className="object-cover" />

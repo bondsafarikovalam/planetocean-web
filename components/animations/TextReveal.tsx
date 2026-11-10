@@ -41,7 +41,9 @@ export function TextReveal({
     : { initial: "hidden", whileInView: "show", viewport: { once: true, amount: 0.4 } };
 
   return (
-    <MotionTag id={id} className={className} aria-label={text} {...trigger}>
+    <MotionTag id={id} className={className} {...trigger}>
+      {/* Real text for assistive tech (aria-label isn't permitted on <p>/<span>); the animated words are aria-hidden. */}
+      <span className="sr-only">{text}</span>
       {words.map((w, i) => (
         <span key={`${w}-${i}`} aria-hidden className="inline-block overflow-hidden pb-[0.1em] align-bottom">
           <motion.span
@@ -72,7 +74,8 @@ export function ScrollWords({ text, className, dim = "opacity-20" }: { text: str
   if (reduce) return <p className={className}>{text}</p>;
 
   return (
-    <p ref={ref} className={className} aria-label={text}>
+    <p ref={ref} className={className}>
+      <span className="sr-only">{text}</span>
       {words.map((w, i) => (
         <Word key={i} progress={scrollYProgress} range={[i / words.length, (i + 1) / words.length]} dim={dim}>
           {w}

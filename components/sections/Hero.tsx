@@ -60,7 +60,7 @@ export function Hero() {
       <motion.div aria-hidden style={{ y: bgY, scale: bgScale }} className="absolute inset-0 -z-30 will-change-transform">
         <motion.div style={{ x: bgPX, y: bgPY }} className="absolute -inset-8">
           <div className="absolute inset-0 animate-drift">
-            <Image src="/images/hero-underwater-light.jpg" alt="" fill priority sizes="100vw" quality={85} className="object-cover object-[50%_30%]" />
+            <Image src="/images/hero-underwater-light.jpg" alt="" fill preload sizes="100vw" quality={85} className="object-cover object-[50%_30%]" />
           </div>
         </motion.div>
       </motion.div>

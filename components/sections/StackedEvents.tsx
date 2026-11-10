@@ -72,7 +72,7 @@ function EventPanel({ e, i, progress }: { e: LandmarkEvent; i: number; progress:
         </h2>
         <TextReveal as="p" text={e.title} className="display-xl mt-6 max-w-5xl font-display" />
         <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/80 md:text-2xl md:leading-snug">{e.description}</p>
-        <PhotoNote className="mt-10">Representative image — event photography to follow</PhotoNote>
+        {!e.eventPhoto && <PhotoNote className="mt-10">Representative image — event photography to follow</PhotoNote>}
       </div>
       <motion.div aria-hidden style={{ opacity: dim }} className="pointer-events-none absolute inset-0 bg-abyss" />
     </motion.article>

@@ -9,7 +9,7 @@ const socialPlaceholders = ["Instagram", "Facebook", "YouTube", "LinkedIn"];
 
 export function Footer() {
   return (
-    <footer className="grain relative overflow-hidden bg-trench text-white">
+    <footer className="cv-auto grain relative overflow-hidden bg-trench text-white">
       {/* atmospheric glow */}
       <div aria-hidden className="pointer-events-none absolute -left-40 top-0 size-[40rem] rounded-full bg-violet/25 orb-soft" />
       <div aria-hidden className="pointer-events-none absolute -right-40 bottom-0 size-[36rem] rounded-full bg-ocean/25 orb-soft" />

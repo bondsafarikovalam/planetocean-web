@@ -42,7 +42,7 @@ export function PageHero({ index, eyebrow, title, accent = [], ghost, intro, ima
   return (
     <section ref={ref} className="relative isolate flex min-h-[88svh] items-end overflow-hidden bg-abyss text-white">
       <motion.div aria-hidden style={{ y: bgY, scale: bgScale }} className="absolute inset-0 -z-30">
-        <Image src={image} alt="" fill priority sizes="100vw" className={cn("object-cover", imagePosition)} />
+        <Image src={image} alt="" fill preload sizes="100vw" className={cn("object-cover", imagePosition)} />
       </motion.div>
       <div aria-hidden className="absolute inset-0 -z-20 bg-gradient-to-b from-abyss/85 via-abyss/45 to-abyss/90" />
       <div aria-hidden className={cn("absolute -right-[10%] -top-[20%] -z-20 size-[60vw] animate-orb rounded-full orb-soft", tints[tint])} />

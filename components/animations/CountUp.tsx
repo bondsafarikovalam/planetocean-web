@@ -30,7 +30,8 @@ export function CountUp({ to, pad = 2, className }: { to: number; pad?: number; 
   }, [armed, inView, to]);
 
   return (
-    <span ref={ref} className={className} aria-label={String(to)}>
+    <span ref={ref} className={className}>
+      <span className="sr-only">{to}</span>
       <span aria-hidden>{String(value).padStart(pad, "0")}</span>
     </span>
   );

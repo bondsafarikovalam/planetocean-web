@@ -315,3 +315,24 @@
   scrollbar-width: none;
   &::-webkit-scrollbar { display: none; }
 }
+
+/* Loading placeholder for every next/image photo: a faint ocean tint (reads as a soft
+   blue-grey on light sections, deep blue on dark ones) until the image paints. */
+img[data-nimg] {
+  background-color: rgb(10 58 85 / 0.16);
+}
+
+/* Below-the-fold sections: the browser skips layout/paint until they near the viewport
+   (measured: initial layout was the largest main-thread cost on mobile). Only used on
+   sections that already clip their overflow and aren't pinned by ScrollTrigger.
+   `auto` makes the browser remember each section's real height once rendered. */
+@utility cv-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 1000px;
+}
+
+/* Auto-advance timer under the active Ocean-worlds tab */
+@keyframes tabfill {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}

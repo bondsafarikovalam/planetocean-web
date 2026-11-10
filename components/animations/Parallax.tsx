@@ -64,7 +64,7 @@ export function ParallaxFrame({
   return (
     <div ref={ref} className={cn("overflow-hidden", className ?? "relative")}>
       <motion.div style={{ y, scale }} className="absolute inset-x-0 -inset-y-[12%] will-change-transform">
-        <Image src={src} alt={alt} fill sizes={sizes} priority={priority} className={cn("object-cover", imgClassName)} />
+        <Image src={src} alt={alt} fill sizes={sizes} preload={priority} className={cn("object-cover", imgClassName)} />
       </motion.div>
     </div>
   );
