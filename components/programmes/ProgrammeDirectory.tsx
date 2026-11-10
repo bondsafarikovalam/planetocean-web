@@ -62,7 +62,7 @@ export function ProgrammeDirectory({ initialFilter = "all" }: { initialFilter?: 
   return (
     <div ref={top}>
       <div className="sticky top-3 z-30 px-3 sm:px-5">
-        <div className="mx-auto flex max-w-[92rem] flex-col gap-3 rounded-[1.75rem] bg-white/70 p-2 shadow-[0_20px_50px_-30px_rgb(3_21_29/0.5)] ring-1 ring-ink/5 backdrop-blur-2xl md:flex-row md:items-center md:justify-between md:rounded-full">
+        <div className="mx-auto flex max-w-[88rem] flex-col gap-3 rounded-[1.75rem] bg-white/70 p-2 shadow-[0_20px_50px_-30px_rgb(3_21_29/0.5)] ring-1 ring-ink/5 backdrop-blur-2xl md:flex-row md:items-center md:justify-between md:rounded-full">
           <ProgrammeFilters options={options} value={filter} onChange={change} />
           <p className="px-4 pb-1 font-mono text-[0.68rem] uppercase tracking-[0.16em] text-ink-soft md:pb-0" aria-live="polite">
             Showing <strong className="font-semibold text-ink">{shown}</strong> of {programmes.length} programmes
@@ -84,7 +84,7 @@ export function ProgrammeDirectory({ initialFilter = "all" }: { initialFilter?: 
                 exit={{ opacity: 0, y: -40, transition: { duration: 0.25 } }}
                 transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
                 aria-labelledby={`band-${c.id}`}
-                className={cn("relative overflow-clip pb-24 pt-32 md:pb-32 md:pt-40", t.bg, t.text)}
+                className={cn("relative overflow-clip pb-24 pt-32 md:pb-32 md:pt-32", t.bg, t.text)}
               >
                 <span
                   aria-hidden

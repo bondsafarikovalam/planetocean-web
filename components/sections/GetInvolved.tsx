@@ -48,7 +48,7 @@ export const involvementTheme: Record<
 /** Section 07 — three visually distinct ways in; each CTA pre-selects its enquiry type. */
 export function GetInvolved() {
   return (
-    <section aria-labelledby="involve-title" className="relative overflow-hidden bg-softmist py-24 md:py-36">
+    <section aria-labelledby="involve-title" className="relative overflow-hidden bg-softmist py-20 md:py-28">
       <div aria-hidden className="tech-grid absolute inset-0 opacity-[0.35] [filter:invert(1)] [mask-image:linear-gradient(to_bottom,black,transparent_70%)]" />
       <div className="container-x relative">
         <div className="grid gap-8 lg:grid-cols-12 lg:items-end">

@@ -34,11 +34,11 @@ export function Footer() {
         </div>
       </div>
 
-      <div className="container-x relative pb-8 pt-20 md:pt-28">
-        <div className="grid gap-14 lg:grid-cols-12">
+      <div className="container-x relative pb-8 pt-20 md:pt-24">
+        <div className="grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-5">
             <Logo />
-            <p className="mt-8 max-w-md font-display text-3xl font-bold leading-[1.1] tracking-tight md:text-4xl">{site.tagline}</p>
+            <p className="mt-8 max-w-md font-display text-3xl font-bold leading-[1.1] tracking-tight md:text-3xl">{site.tagline}</p>
             <p lang="ml" className="mt-4 text-lg text-biolum">
               {site.taglineMl}
             </p>
@@ -117,7 +117,7 @@ export function Footer() {
         </div>
 
         {/* giant wordmark */}
-        <div className="@container mt-20">
+        <div className="@container mt-16">
           <p
             aria-hidden
             className="pointer-events-none select-none whitespace-nowrap bg-gradient-to-b from-white/[0.14] to-white/[0.01] bg-clip-text pb-[0.06em] text-center font-display text-[16cqw] font-extrabold leading-[0.85] tracking-[-0.06em] text-transparent"

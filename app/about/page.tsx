@@ -98,7 +98,7 @@ export default function AboutPage() {
         tint="ocean"
       />
 
-      <section aria-labelledby="mission-title" className="relative overflow-hidden bg-pearl py-24 md:py-36">
+      <section aria-labelledby="mission-title" className="relative overflow-hidden bg-pearl py-20 md:py-28">
         <div aria-hidden className="absolute -left-40 top-20 size-[36rem] rounded-full bg-cyan/15 orb-soft" />
         <div className="container-x relative">
           <div className="flex items-center justify-between border-b border-ink/10 pb-5 font-mono text-[0.7rem] uppercase tracking-[0.2em] text-ink-soft">
@@ -122,7 +122,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section aria-labelledby="approach-title" className="bg-abyss py-24 text-white md:py-36">
+      <section aria-labelledby="approach-title" className="bg-abyss py-20 text-white md:py-28">
         <div className="container-x">
           <div className="grid gap-8 lg:grid-cols-12 lg:items-end">
             <div className="lg:col-span-7">
@@ -144,7 +144,7 @@ export default function AboutPage() {
                 )}
               >
                 <span className="font-mono text-sm opacity-60">0{c.index}</span>
-                <h3 className="font-display text-3xl font-extrabold tracking-tight md:text-4xl">{c.filterLabel}</h3>
+                <h3 className="font-display text-3xl font-extrabold tracking-tight md:text-3xl">{c.filterLabel}</h3>
                 <p className="col-start-2 font-mono text-xs uppercase tracking-[0.16em] opacity-70 md:col-start-auto">{c.depth}</p>
                 <p className="col-start-2 opacity-80 md:col-start-auto">{c.summary}</p>
                 <p className="col-start-2 font-mono text-xs uppercase tracking-[0.16em] opacity-60 md:col-start-auto md:text-right">{programmesIn(c.id).length} programmes</p>
@@ -154,14 +154,14 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section aria-label="What we do" className="bg-softmist py-24 md:py-32">
+      <section aria-label="What we do" className="bg-softmist py-20 md:py-24">
         <div className="container-x">
           <p className="eyebrow mb-12 text-ocean-ink">03 — What we do</p>
           <AboutStrands strands={strands} />
         </div>
       </section>
 
-      <section aria-labelledby="waters-title" className="grain relative overflow-hidden bg-atlantic py-24 text-white md:py-36">
+      <section aria-labelledby="waters-title" className="grain relative overflow-hidden bg-atlantic py-20 text-white md:py-28">
         <div aria-hidden className="absolute -right-40 -top-40 size-[40rem] animate-orb rounded-full bg-violet/35 orb-soft" />
         <div className="container-x relative">
           <p className="eyebrow text-cyan">04 — Where we work</p>
@@ -189,9 +189,9 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section aria-labelledby="bond-title" className="relative overflow-hidden bg-pearl py-24 md:py-36">
+      <section aria-labelledby="bond-title" className="relative overflow-hidden bg-pearl py-20 md:py-28">
         <div aria-hidden className="absolute -bottom-40 -right-40 size-[36rem] rounded-full bg-coral/15 orb-soft" />
-        <div className="container-x relative grid gap-14 lg:grid-cols-12">
+        <div className="container-x relative grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-5">
             <p className="eyebrow text-ocean-ink">05 — Bond Group of Companies</p>
             <TextReveal id="bond-title" text="The CSR wing of Bond Group." className="display-lg mt-5 text-ink" accent={["Bond", "Group."]} accentClassName="text-gradient-ocean" />

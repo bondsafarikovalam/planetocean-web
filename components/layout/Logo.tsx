@@ -1,21 +1,56 @@
 import Link from "next/link";
+import { useId } from "react";
 import { cn } from "@/lib/utils";
 
-/** Original mark: a planet outline cut by two tide lines, with a cyan-to-violet gradient. */
+/**
+ * Planet Ocean Foundation wordmark, drawn as pure vector strokes (no font dependency).
+ * Lettering uses `currentColor`, so it reads black on light and white on dark;
+ * the water inside the "O" keeps its brand blue either way.
+ */
 export function LogoMark({ className }: { className?: string }) {
+  const id = useId().replace(/:/g, "");
   return (
-    <svg viewBox="0 0 48 48" aria-hidden className={cn("size-10", className)}>
+    <svg viewBox="-2 -2 260 115" role="img" aria-label="Planet Ocean Foundation" className={cn("h-11 w-auto", className)}>
       <defs>
-        <linearGradient id="pof-g" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="#8AFFF0" />
-          <stop offset="0.55" stopColor="#42E8E0" />
-          <stop offset="1" stopColor="#635BDB" />
+        <linearGradient id={`${id}-water`} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="#8FD9F7" />
+          <stop offset="0.35" stopColor="#3CC0F2" />
+          <stop offset="1" stopColor="#009FE8" />
         </linearGradient>
+        <clipPath id={`${id}-inner`}>
+          <circle cx="29" cy="63" r="20.5" />
+        </clipPath>
       </defs>
-      <circle cx="24" cy="24" r="20" fill="none" stroke="currentColor" strokeWidth="2" opacity="0.9" />
-      <path d="M4.5 25.5c3.8-3 7.4-3 11.2 0s7.4 3 11.2 0 7.4-3 11.2 0 4.6 2.2 5.4 1.2" fill="none" stroke="url(#pof-g)" strokeWidth="2.6" strokeLinecap="round" />
-      <path d="M9 33c3-2.4 6-2.4 9 0s6 2.4 9 0 6-2.4 9 0 3.4 1.6 4 1" fill="none" stroke="url(#pof-g)" strokeWidth="2.6" strokeLinecap="round" opacity="0.55" />
-      <circle cx="31" cy="14.5" r="2.4" fill="#FF806C" />
+
+      <g fill="none" stroke="currentColor" strokeLinejoin="miter" strokeMiterlimit="2">
+        {/* PLANET */}
+        <path
+          strokeWidth="4"
+          d="M5 24V2h7a5 5 0 0 1 0 10H5 M24 0v22h11 M39.5 24L48 1.5 56.5 24 M63 24V1l15 22V0 M97 2H86v20h11 M86 12h10 M99 2h16 M107 2v22"
+        />
+
+        {/* OCEAN (the O is the emblem below) */}
+        <circle cx="29" cy="63" r="25.75" strokeWidth="6.5" />
+        <path
+          strokeWidth="6.5"
+          d="M108.55 43.27A25.75 25.75 0 1 0 108.55 82.73 M150 37.25h-29v51.5h29 M121 62h22 M157.5 92L179 36l21.5 56 M213 92V36l38.5 54V34"
+        />
+
+        {/* FOUNDATION */}
+        <path
+          strokeWidth="1.8"
+          d="M4 110v-9h4.5 M4 105.5h3.5 M60.9 100v6.4a3.1 3.1 0 0 0 6.2 0V100 M89 110v-9.5l5.5 9V100 M117 101v8.2h2.4a4.1 4.1 0 0 0 0-8.2Z M144.5 110l3.5-9.5 3.5 9.5 M171 101h6 M174 101v9 M197 100v10 M248 110v-9.5l6 9V100"
+        />
+        <circle cx="34" cy="105" r="4.6" strokeWidth="1.8" />
+        <circle cx="222.5" cy="105" r="4.6" strokeWidth="1.8" />
+      </g>
+
+      {/* Water inside the O */}
+      <g clipPath={`url(#${id}-inner)`}>
+        <path d="M6 52.5Q29 60.5 52 52.5V88H6Z" fill={`url(#${id}-water)`} />
+        <path d="M6 59.5Q29 66.5 52 59.5" fill="none" stroke="#fff" strokeOpacity="0.3" strokeWidth="2.2" />
+        <path d="M6 66.5Q29 72.5 52 66.5" fill="none" stroke="#fff" strokeOpacity="0.16" strokeWidth="2.2" />
+      </g>
     </svg>
   );
 }
@@ -25,15 +60,9 @@ export function Logo({ className, tone = "light", compact = false }: { className
     <Link
       href="/"
       aria-label="Planet Ocean Foundation — home"
-      className={cn("group flex shrink-0 items-center gap-3", tone === "light" ? "text-white" : "text-ink", className)}
+      className={cn("group flex shrink-0 items-center", tone === "light" ? "text-white" : "text-ink", className)}
     >
-      <LogoMark className={cn("transition-all duration-700 ease-tide group-hover:rotate-[24deg]", compact ? "size-9" : "size-10")} />
-      <span className="flex flex-col leading-none">
-        <span className="font-display text-[1.05rem] font-extrabold tracking-tight">Planet Ocean</span>
-        <span className={cn("font-mono text-[0.58rem] uppercase tracking-[0.32em] opacity-65 transition-all duration-500", compact ? "mt-0.5" : "mt-1.5")}>
-          Foundation
-        </span>
-      </span>
+      <LogoMark className={cn("w-auto transition-all duration-500 ease-tide", compact ? "h-9" : "h-11")} />
     </Link>
   );
 }

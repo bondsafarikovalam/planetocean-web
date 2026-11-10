@@ -59,7 +59,7 @@ export function PageHero({ index, eyebrow, title, accent = [], ghost, intro, ima
         </motion.p>
       )}
 
-      <motion.div style={{ y: contentY, opacity: fade }} className="container-x relative w-full pb-32 pt-40 md:pb-40">
+      <motion.div style={{ y: contentY, opacity: fade }} className="container-x relative w-full pb-32 pt-32 md:pb-32">
         <motion.div
           className="mb-10 flex items-center justify-between border-b border-white/15 pb-5 font-mono text-[0.68rem] uppercase tracking-[0.2em] text-white/60"
           initial={{ opacity: 0, y: -10 }}
@@ -74,7 +74,7 @@ export function PageHero({ index, eyebrow, title, accent = [], ghost, intro, ima
         <TextReveal as="h1" onMount delay={0.6} text={title} accent={accent} className="display-xl max-w-6xl" />
         {intro && (
           <motion.div
-            className="mt-10 max-w-2xl text-lg leading-relaxed text-white/80 md:text-xl"
+            className="mt-10 max-w-2xl text-lg leading-relaxed text-white/80 md:text-lg"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: EASE, delay: 1.2 }}

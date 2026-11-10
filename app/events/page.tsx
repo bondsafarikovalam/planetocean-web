@@ -28,7 +28,7 @@ export default function EventsPage() {
         tint="violet"
       />
 
-      <section aria-label="About these events" className="relative overflow-hidden bg-abyss py-20 text-white md:py-32">
+      <section aria-label="About these events" className="relative overflow-hidden bg-abyss py-20 text-white md:py-24">
         <div aria-hidden className="absolute -right-40 top-0 size-[40rem] animate-orb rounded-full bg-ocean/25 orb-soft" />
         <div className="container-x relative grid gap-12 lg:grid-cols-12">
           <Reveal className="lg:col-span-3">

@@ -78,7 +78,7 @@ export default async function GetInvolvedPage({ searchParams }: Props) {
               >
                 0{i + 1}
               </span>
-              <div className="relative grid items-center gap-12 lg:grid-cols-12 lg:gap-20">
+              <div className="relative grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
                 <div className={cn("lg:col-span-6", flip && "lg:order-2")}>
                   <Parallax speed={-0.08}>
                     <Reveal>
@@ -98,7 +98,7 @@ export default async function GetInvolvedPage({ searchParams }: Props) {
                   </Reveal>
                   <TextReveal id={`${p.id}-title`} text={p.title} className="display-lg mt-3" />
                   <Reveal delay={0.1}>
-                    <p className={cn("mt-6 max-w-xl text-lg leading-relaxed md:text-xl", light ? "text-ink-soft" : "text-white/85")}>{p.description}</p>
+                    <p className={cn("mt-6 max-w-xl text-lg leading-relaxed md:text-lg", light ? "text-ink-soft" : "text-white/85")}>{p.description}</p>
                     <Link
                       href={`/get-involved?interest=${p.id}#enquiry`}
                       className={cn("group mt-10 inline-flex min-h-13 items-center gap-3 rounded-full py-2 pl-6 pr-2 font-semibold transition-colors duration-500", th.button)}
@@ -116,7 +116,7 @@ export default async function GetInvolvedPage({ searchParams }: Props) {
         })}
       </section>
 
-      <section id="enquiry" aria-labelledby="enquiry-title" className="grain relative scroll-mt-4 overflow-hidden bg-atlantic py-24 md:py-36">
+      <section id="enquiry" aria-labelledby="enquiry-title" className="grain relative scroll-mt-4 overflow-hidden bg-atlantic py-20 md:py-28">
         <div aria-hidden className="absolute -left-40 top-0 size-[44rem] animate-orb rounded-full bg-violet/40 orb-soft" />
         <div aria-hidden className="absolute -bottom-40 right-0 size-[36rem] animate-orb rounded-full bg-ocean/35 orb-soft [animation-delay:-10s]" />
         <div aria-hidden className="tech-grid absolute inset-0 opacity-50 [mask-image:radial-gradient(ellipse_at_center,black,transparent_75%)]" />

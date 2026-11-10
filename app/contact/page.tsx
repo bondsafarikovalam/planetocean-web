@@ -31,7 +31,7 @@ export default function ContactPage() {
       />
 
       <section aria-labelledby="contact-form-title" className="bg-softmist px-3 pb-6 pt-10 sm:px-5 md:pt-16">
-        <div className="mx-auto grid max-w-[92rem] gap-4 lg:grid-cols-12">
+        <div className="mx-auto grid max-w-[88rem] gap-4 lg:grid-cols-12">
           <div className="grain relative overflow-hidden rounded-[2.5rem] bg-abyss p-8 text-white sm:p-12 lg:col-span-5">
             <Image src="/images/cat-blue.jpg" alt="" fill sizes="40vw" className="object-cover opacity-25" />
             <div aria-hidden className="absolute -bottom-32 -left-32 size-[30rem] animate-orb rounded-full bg-violet/40 orb-soft" />

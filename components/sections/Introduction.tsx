@@ -23,7 +23,7 @@ const locations = [
 /** Section 02 — asymmetric editorial introduction with a layered, parallax photo composition. */
 export function Introduction() {
   return (
-    <section id="introduction" aria-labelledby="intro-title" className="relative overflow-hidden bg-pearl pb-28 pt-20 md:pb-40 md:pt-28">
+    <section id="introduction" aria-labelledby="intro-title" className="relative overflow-hidden bg-pearl pb-28 pt-20 md:pb-32 md:pt-24">
       <div aria-hidden className="pointer-events-none absolute -right-48 top-40 size-[44rem] rounded-full bg-cyan/15 orb-soft" />
       <div aria-hidden className="pointer-events-none absolute -left-48 bottom-0 size-[36rem] rounded-full bg-violet/10 orb-soft" />
 

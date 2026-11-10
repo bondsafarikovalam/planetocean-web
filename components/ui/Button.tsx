@@ -31,7 +31,7 @@ export function ButtonLink({ href, children, variant = "primary", className, ico
     <Link
       href={href}
       className={cn(
-        "group relative isolate inline-flex min-h-13 items-center justify-center gap-3 overflow-hidden rounded-full py-3.5 pl-7 pr-3 text-[0.95rem] font-semibold tracking-tight transition-colors duration-500",
+        "group relative isolate inline-flex min-h-12 items-center justify-center gap-3 overflow-hidden rounded-full py-3 pl-6 pr-2.5 text-[0.9rem] font-semibold tracking-tight transition-colors duration-500",
         icon === "none" && "pr-7",
         base,
         className,

@@ -99,7 +99,7 @@ export function OceanWorlds() {
     <section ref={section} aria-labelledby="worlds-title" className="relative overflow-hidden bg-abyss">
       <div ref={track} className={cn("flex lg:h-screen lg:w-max lg:flex-row", pinned ? "h-[100svh] w-max flex-row" : "flex-col")}>
         {/* Intro panel */}
-        <div className={cn("relative flex shrink-0 flex-col justify-center overflow-hidden bg-pearl px-5 py-24 sm:px-8 lg:h-full lg:w-[44vw] lg:px-14", pinned && "h-full w-screen")}>
+        <div className={cn("relative flex shrink-0 flex-col justify-center overflow-hidden bg-pearl px-5 py-20 sm:px-8 lg:h-full lg:w-[44vw] lg:px-14", pinned && "h-full w-screen")}>
           <div aria-hidden className="absolute -bottom-40 -left-20 size-[30rem] rounded-full bg-cyan/20 orb-soft" />
           <p className="eyebrow relative text-ocean-ink">04 — Explore the four ocean worlds</p>
           <TextReveal id="worlds-title" as="h2" text="Where the work happens." className="display-xl relative mt-6 text-ink" accent={["happens."]} accentClassName="text-gradient-ocean" />
@@ -190,7 +190,7 @@ function WorldPanel({ c, pinned }: { c: Category; pinned: boolean }) {
         0{c.index}
       </span>
 
-      <div className={cn("container-x relative grid w-full items-center lg:grid-cols-12 lg:gap-12 lg:py-0", pinned ? "content-center gap-6 pb-16 pt-20" : "gap-12 py-24")}>
+      <div className={cn("container-x relative grid w-full items-center lg:grid-cols-12 lg:gap-12 lg:py-0", pinned ? "content-center gap-6 pb-16 pt-20" : "gap-12 py-20")}>
         <div className={cn("lg:col-span-6", !fullBleed && "lg:order-1")}>
           <p className={cn("eyebrow flex items-center gap-3", t.accent)}>
             <span className="font-mono">0{c.index} / 04</span>
@@ -201,7 +201,7 @@ function WorldPanel({ c, pinned }: { c: Category; pinned: boolean }) {
             {c.name}
           </h3>
           {c.id === "blue" && <p className={cn("mt-3 font-display text-xl font-semibold", t.sub)}>Climate &amp; blue economy</p>}
-          <p className={cn("mt-4 max-w-md text-base leading-relaxed md:text-xl lg:mt-6", t.sub)}>{c.summary}</p>
+          <p className={cn("mt-4 max-w-md text-base leading-relaxed md:text-lg lg:mt-6", t.sub)}>{c.summary}</p>
 
           <ul className="mt-5 flex max-w-xl flex-wrap gap-1.5 lg:mt-8 lg:gap-2">
             {list.map((p) => (

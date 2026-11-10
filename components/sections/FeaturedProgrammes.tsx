@@ -15,7 +15,7 @@ export function FeaturedProgrammes() {
   const [lead, a, b, split, c, d, e] = featured;
 
   return (
-    <section aria-labelledby="featured-title" className="relative bg-pearl py-24 md:py-36">
+    <section aria-labelledby="featured-title" className="relative bg-pearl py-20 md:py-28">
       <div className="container-x">
         <div className="grid gap-8 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-8">
@@ -34,7 +34,7 @@ export function FeaturedProgrammes() {
       </div>
 
       {/* 1 — Full-width photographic panel */}
-      <div className="mt-16 px-3 sm:px-5 md:mt-24">
+      <div className="mt-16 px-3 sm:px-5 md:mt-20">
         <article id={`showcase-${lead.number}`} className="group relative overflow-hidden rounded-[2.5rem] bg-abyss text-white">
           <MaskReveal className="relative h-[55svh] w-full md:h-[80svh] md:min-h-[36rem]">
             <ParallaxFrame src={lead.image} alt={lead.imageAlt} className="absolute inset-0" strength={0.22} />
@@ -72,7 +72,7 @@ export function FeaturedProgrammes() {
         </article>
       </div>
 
-      <div className="container-x mt-20 space-y-24 md:mt-32 md:space-y-36">
+      <div className="container-x mt-16 space-y-24 md:mt-32 md:space-y-36">
         {/* 2 — Asymmetric pair */}
         <div className="grid gap-16 md:grid-cols-12 md:gap-10">
           <Reveal className="md:col-span-7">
@@ -97,7 +97,7 @@ export function FeaturedProgrammes() {
             <p className="mt-4 font-mono text-[0.68rem] uppercase tracking-[0.18em] text-ink-soft">
               {categoryById[split.category].filterLabel} · {categoryById[split.category].depth}
             </p>
-            <h3 className="mt-2 font-display text-3xl font-bold leading-tight tracking-tight text-ink md:text-4xl">
+            <h3 className="mt-2 font-display text-3xl font-bold leading-tight tracking-tight text-ink md:text-3xl">
               <Link href={`/programmes#programme-${split.number}`} className="after:absolute after:inset-0 after:content-['']">
                 {split.title}
               </Link>

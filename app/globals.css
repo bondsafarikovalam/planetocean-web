@@ -106,6 +106,17 @@
   html {
     -webkit-text-size-adjust: 100%;
     scroll-padding-top: 6rem;
+    /* Whole-site scale: every rem-based size (type, spacing, buttons, cards) shrinks
+       together on larger screens. Phones stay at 16px so form fields don't trigger zoom. */
+    @media (width >= 48rem) { font-size: 93.75%; }
+    @media (width >= 64rem) { font-size: 87.5%; }
+    /* Hide the page scrollbar (scrolling still works; the top progress bar shows position). */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  html::-webkit-scrollbar,
+  body::-webkit-scrollbar {
+    display: none;
   }
   @media (prefers-reduced-motion: no-preference) {
     html { scroll-behavior: smooth; }
@@ -145,11 +156,11 @@
 /* ═══════════════════════ Utilities ═══════════════════════ */
 @utility container-x {
   width: 100%;
-  max-width: 92rem;
+  max-width: 88rem;
   margin-inline: auto;
   padding-inline: 1.25rem;
   @media (width >= 40rem) { padding-inline: 2rem; }
-  @media (width >= 64rem) { padding-inline: 3.5rem; }
+  @media (width >= 64rem) { padding-inline: 3rem; }
 }
 
 /* Telemetry-style label */
@@ -162,25 +173,25 @@
 }
 
 @utility display-2xl {
-  font-size: clamp(3.1rem, 10.5vw, 11.5rem);
+  font-size: clamp(2.35rem, 6vw, 6.5rem);
   line-height: 0.88;
   font-weight: 800;
   letter-spacing: -0.055em;
 }
 @utility display-xl {
-  font-size: clamp(2.8rem, 7.6vw, 7.75rem);
+  font-size: clamp(2.05rem, 4.5vw, 4.5rem);
   line-height: 0.92;
   font-weight: 800;
   letter-spacing: -0.05em;
 }
 @utility display-lg {
-  font-size: clamp(2.3rem, 5.2vw, 5rem);
+  font-size: clamp(1.8rem, 3.3vw, 3.2rem);
   line-height: 0.98;
   font-weight: 800;
   letter-spacing: -0.045em;
 }
 @utility display-md {
-  font-size: clamp(1.8rem, 3.3vw, 3rem);
+  font-size: clamp(1.45rem, 2.2vw, 2.1rem);
   line-height: 1.04;
   font-weight: 700;
   letter-spacing: -0.035em;

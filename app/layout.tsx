@@ -59,7 +59,6 @@ export const metadata: Metadata = {
     description: site.description,
     images: [site.ogImage],
   },
-  icons: { icon: "/icon.svg" },
 };
 
 export const viewport: Viewport = {

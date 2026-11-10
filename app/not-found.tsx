@@ -3,7 +3,7 @@ import { ButtonLink } from "@/components/ui/Button";
 
 export default function NotFound() {
   return (
-    <section className="relative isolate flex min-h-[85svh] items-center overflow-hidden bg-abyss pb-24 pt-36 text-white">
+    <section className="relative isolate flex min-h-[85svh] items-center overflow-hidden bg-abyss pb-24 pt-28 text-white">
       <div aria-hidden className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_50%_0%,rgb(99_91_219/0.45),transparent_60%)]" />
       <LightRays className="-z-10 opacity-60" />
       <Bubbles className="-z-10" />

@@ -88,7 +88,7 @@ export function AboutStrands({ strands }: { strands: Strand[] }) {
                 0{i + 1} · {st.id === "blue" ? "Blue" : cat.filterLabel} · {cat.depth}
               </p>
               <h2 className="display-lg mt-4 text-ink">{st.title}</h2>
-              <p className="mt-6 text-lg leading-relaxed text-ink-soft md:text-xl">{st.body}</p>
+              <p className="mt-6 text-lg leading-relaxed text-ink-soft md:text-lg">{st.body}</p>
               <ul className="mt-8 flex flex-wrap gap-2">
                 {st.refs.map((n) => {
                   const p = programmeByNumber(n);

@@ -59,7 +59,7 @@ export function Navbar() {
             "mx-auto flex items-center justify-between gap-4 transition-all duration-700 ease-tide",
             scrolled
               ? "mt-3 max-w-6xl rounded-full bg-abyss/80 py-2 pl-4 pr-2 shadow-[0_20px_60px_-25px_rgb(0_0_0/0.7)] ring-1 ring-white/10 backdrop-blur-md"
-              : "mt-0 max-w-[92rem] py-6 pl-2 pr-0 sm:pl-6 sm:pr-4",
+              : "mt-0 max-w-[88rem] py-6 pl-2 pr-0 sm:pl-6 sm:pr-4",
           )}
         >
           <Logo compact={scrolled} />

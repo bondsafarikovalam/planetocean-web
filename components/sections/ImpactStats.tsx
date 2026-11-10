@@ -18,7 +18,7 @@ const barColour: Record<string, string> = {
 /** Section 03 — instrument-panel snapshot of verified facts only. */
 export function ImpactStats() {
   return (
-    <section aria-labelledby="facts-title" className="grain relative overflow-hidden bg-atlantic py-24 text-white md:py-36">
+    <section aria-labelledby="facts-title" className="grain relative overflow-hidden bg-atlantic py-20 text-white md:py-28">
       <div aria-hidden className="tech-grid absolute inset-0 [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_75%)]" />
       <div aria-hidden className="absolute -right-40 -top-40 size-[44rem] animate-orb rounded-full bg-violet/35 orb-soft" />
       <div aria-hidden className="absolute -bottom-40 -left-40 size-[36rem] animate-orb rounded-full bg-ocean/30 orb-soft [animation-delay:-12s]" />

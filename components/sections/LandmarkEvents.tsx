@@ -121,7 +121,7 @@ export function LandmarkEvents({ showHeader = true, showLink = true }: { showHea
                     <span className="sr-only">{e.label}: </span>
                     {e.title}
                   </h3>
-                  <p className="mt-4 max-w-xl text-base leading-relaxed text-white/80 md:text-xl lg:mt-6">{e.description}</p>
+                  <p className="mt-4 max-w-xl text-base leading-relaxed text-white/80 md:text-lg lg:mt-6">{e.description}</p>
                   <p aria-hidden className="mt-6 font-mono lg:mt-8 text-xs uppercase tracking-[0.2em] text-white/45">
                     0{i + 1} / 0{landmarkEvents.length}
                   </p>

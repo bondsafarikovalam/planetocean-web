@@ -89,7 +89,7 @@ export function Hero() {
       <Bubbles className="-z-10" />
 
       {/* L5 — content */}
-      <motion.div style={{ y: contentY, opacity: contentOpacity }} className="container-x relative w-full pb-36 pt-40 md:pb-44">
+      <motion.div style={{ y: contentY, opacity: contentOpacity }} className="container-x relative w-full pb-28 pt-32 md:pb-44">
         <motion.p
           className="eyebrow mb-8 flex items-center gap-3 text-cyan"
           initial={{ opacity: 0, x: -20 }}

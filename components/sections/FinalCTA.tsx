@@ -29,7 +29,7 @@ export function FinalCTA({
 
   return (
     <section ref={ref} aria-labelledby="cta-title" className="relative isolate overflow-hidden bg-pearl">
-      <motion.div style={{ clipPath: clip }} className="relative isolate overflow-hidden bg-abyss py-36 text-white md:py-52">
+      <motion.div style={{ clipPath: clip }} className="relative isolate overflow-hidden bg-abyss py-28 text-white md:py-52">
         <motion.div aria-hidden style={{ scale: imgScale }} className="absolute inset-0 -z-20">
           <Image src="/images/final-cta-horizon.jpg" alt="" fill sizes="100vw" className="object-cover" />
         </motion.div>
