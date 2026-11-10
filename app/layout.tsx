@@ -1,22 +1,26 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Manrope, Noto_Sans_Malayalam } from "next/font/google";
+import { Inter, JetBrains_Mono, Noto_Sans_Malayalam, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { MotionProvider } from "@/components/animations/MotionProvider";
+import { ScrollProgress } from "@/components/layout/ScrollProgress";
+import { SmoothScroll } from "@/components/layout/SmoothScroll";
 import { site } from "@/lib/site";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
-const manrope = Manrope({
+const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
-  variable: "--font-manrope",
+  variable: "--font-jakarta",
   display: "swap",
   weight: ["400", "500", "600", "700", "800"],
 });
+const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono-face", display: "swap", weight: ["400", "500"] });
 const malayalam = Noto_Sans_Malayalam({
   subsets: ["malayalam"],
   variable: "--font-malayalam",
   display: "swap",
+  preload: false,
   weight: ["400", "500", "600"],
 });
 
@@ -59,22 +63,24 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#061F2B",
+  themeColor: "#03151D",
   width: "device-width",
   initialScale: 1,
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en-IN" className={`${inter.variable} ${manrope.variable} ${malayalam.variable}`}>
+    <html lang="en-IN" data-scroll-behavior="smooth" className={`${inter.variable} ${jakarta.variable} ${mono.variable} ${malayalam.variable}`}>
       <body>
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-aqua focus:px-5 focus:py-3 focus:font-semibold focus:text-abyss"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-cyan focus:px-5 focus:py-3 focus:font-semibold focus:text-abyss"
         >
           Skip to content
         </a>
         <MotionProvider>
+          <SmoothScroll />
+        <ScrollProgress />
           <Navbar />
           <main id="main">{children}</main>
           <Footer />

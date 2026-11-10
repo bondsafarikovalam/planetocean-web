@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Hero } from "@/components/sections/Hero";
 import { Introduction } from "@/components/sections/Introduction";
 import { ImpactStats } from "@/components/sections/ImpactStats";
-import { ProgrammesPreview } from "@/components/sections/ProgrammesPreview";
+import { OceanWorlds } from "@/components/sections/OceanWorlds";
 import { FeaturedProgrammes } from "@/components/sections/FeaturedProgrammes";
 import { LandmarkEvents } from "@/components/sections/LandmarkEvents";
 import { GetInvolved } from "@/components/sections/GetInvolved";
@@ -39,7 +39,7 @@ export default function HomePage() {
       <Hero />
       <Introduction />
       <ImpactStats />
-      <ProgrammesPreview />
+      <OceanWorlds />
       <FeaturedProgrammes />
       <LandmarkEvents />
       <GetInvolved />

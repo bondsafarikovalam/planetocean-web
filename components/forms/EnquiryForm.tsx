@@ -108,19 +108,19 @@ export function EnquiryForm({ defaultInterest = "", className }: { defaultIntere
         role="status"
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
-        className={cn("rounded-[1.75rem] bg-white p-8 ring-1 ring-ink/10 md:p-10", className)}
+        className={cn("border border-line bg-white p-8 md:p-10", className)}
       >
-        <CircleCheck className="size-10 text-teal" aria-hidden />
+        <CircleCheck className="size-10 text-brand" aria-hidden />
         {status === "sent" ? (
           <>
-            <h3 className="mt-5 font-display text-2xl font-bold text-ink">Thank you, {fields.name.split(" ")[0]}.</h3>
-            <p className="mt-3 leading-relaxed text-ink-soft">Your enquiry has been sent. The Foundation team will be in touch.</p>
+            <h3 className="mt-5 font-serif text-2xl text-ink">Thank you, {fields.name.split(" ")[0]}.</h3>
+            <p className="mt-3 leading-relaxed text-muted">Your enquiry has been sent. The Foundation team will be in touch.</p>
           </>
         ) : (
           <>
-            <h3 className="mt-5 font-display text-2xl font-bold text-ink">Your enquiry passed validation.</h3>
-            <div className="mt-4 flex gap-3 rounded-2xl bg-sand p-4 text-sm leading-relaxed text-ink">
-              <Info className="mt-0.5 size-4 shrink-0 text-teal-ink" aria-hidden />
+            <h3 className="mt-5 font-serif text-2xl text-ink">Your enquiry passed validation.</h3>
+            <div className="mt-4 flex gap-3 border-l-2 border-gold bg-tint p-4 text-sm leading-relaxed text-ink">
+              <Info className="mt-0.5 size-4 shrink-0 text-brand" aria-hidden />
               <p>
                 <strong>Demo mode:</strong> this website does not yet have a form backend connected, so your message has{" "}
                 <strong>not</strong> been sent or stored anywhere. Once the form is connected, enquiries like this one will reach
@@ -132,7 +132,7 @@ export function EnquiryForm({ defaultInterest = "", className }: { defaultIntere
         <button
           type="button"
           onClick={reset}
-          className="mt-8 inline-flex min-h-12 items-center rounded-full bg-abyss px-6 text-sm font-semibold text-white transition-colors hover:bg-teal"
+          className="mt-8 inline-flex min-h-12 items-center bg-brand px-6 text-[0.72rem] font-bold uppercase tracking-[0.14em] text-white transition-colors hover:bg-brand-dark"
         >
           Start a new enquiry
         </button>
@@ -141,13 +141,13 @@ export function EnquiryForm({ defaultInterest = "", className }: { defaultIntere
   }
 
   const inputBase =
-    "mt-2 block w-full rounded-2xl border-0 bg-mist px-4 py-3.5 text-base text-ink ring-1 ring-inset ring-ink/10 transition-shadow placeholder:text-ink-soft/60 focus:bg-white focus:outline-none focus:ring-2 focus:ring-teal";
+    "mt-2 block w-full border border-line bg-white px-4 py-3 text-base text-ink transition-colors placeholder:text-muted/60 focus:border-brand focus:outline-none focus:ring-1 focus:ring-brand";
 
   return (
-    <form noValidate onSubmit={onSubmit} className={cn("rounded-[1.75rem] bg-white p-6 ring-1 ring-ink/10 sm:p-8 md:p-10", className)}>
+    <form noValidate onSubmit={onSubmit} className={cn("border border-line bg-white p-6 sm:p-8 md:p-10", className)}>
       {!ENDPOINT && (
-        <p className="mb-8 flex gap-2.5 rounded-2xl bg-sand/70 px-4 py-3 text-sm text-ink">
-          <Info className="mt-0.5 size-4 shrink-0 text-teal-ink" aria-hidden />
+        <p className="mb-8 flex gap-2.5 border-l-2 border-gold bg-tint px-4 py-3 text-sm text-ink">
+          <Info className="mt-0.5 size-4 shrink-0 text-brand" aria-hidden />
           <span>Preview mode: the form validates your details but does not send them yet.</span>
         </p>
       )}
@@ -215,7 +215,7 @@ export function EnquiryForm({ defaultInterest = "", className }: { defaultIntere
             onBlur={blur("interest")}
             aria-invalid={!!show("interest")}
             aria-describedby={show("interest") ? `${id("interest")}-err` : undefined}
-            className={cn(inputBase, "appearance-none bg-[url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%230c2530%22 stroke-width=%222%22><path d=%22m6 9 6 6 6-6%22/></svg>')] bg-size-[1.1rem] bg-position-[right_1rem_center] bg-no-repeat pr-12", show("interest") && "ring-2 ring-red-500/70")}
+            className={cn(inputBase, "appearance-none bg-[url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%231c2a31%22 stroke-width=%222%22><path d=%22m6 9 6 6 6-6%22/></svg>')] bg-size-[1.1rem] bg-position-[right_1rem_center] bg-no-repeat pr-12", show("interest") && "ring-2 ring-red-500/70")}
           >
             <option value="">Choose one…</option>
             <optgroup label="Get involved">
@@ -259,7 +259,7 @@ export function EnquiryForm({ defaultInterest = "", className }: { defaultIntere
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="mt-6 rounded-2xl bg-red-50 px-4 py-3 text-sm text-red-800"
+            className="mt-6 bg-red-50 px-4 py-3 text-sm text-red-800"
           >
             Sorry — your enquiry could not be sent. Please try again in a moment.
           </motion.p>
@@ -267,14 +267,14 @@ export function EnquiryForm({ defaultInterest = "", className }: { defaultIntere
       </AnimatePresence>
 
       <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <p className="text-xs text-ink-soft">
-          Fields marked <span aria-hidden className="text-teal-ink">*</span>
+        <p className="text-xs text-muted">
+          Fields marked <span aria-hidden className="text-brand">*</span>
           <span className="sr-only">with an asterisk</span> are required.
         </p>
         <button
           type="submit"
           disabled={status === "submitting"}
-          className="group inline-flex min-h-12 items-center justify-center gap-2.5 rounded-full bg-aqua px-7 font-semibold text-abyss transition-colors hover:bg-teal hover:text-white disabled:opacity-60"
+          className="group inline-flex min-h-12 items-center justify-center gap-2.5 bg-brand px-7 text-[0.72rem] font-bold uppercase tracking-[0.14em] text-white transition-colors hover:bg-brand-dark disabled:opacity-60"
         >
           {status === "submitting" ? (
             <>
@@ -313,12 +313,12 @@ function Field({
       <label htmlFor={id} className="text-sm font-semibold text-ink">
         {label}
         {required && (
-          <span aria-hidden className="ml-0.5 text-teal-ink">
+          <span aria-hidden className="ml-0.5 text-brand">
             *
           </span>
         )}
         {required && <span className="sr-only"> (required)</span>}
-        {optional && <span className="ml-1.5 font-normal text-ink-soft">(optional)</span>}
+        {optional && <span className="ml-1.5 font-normal text-muted">(optional)</span>}
       </label>
       {children}
       {error && (

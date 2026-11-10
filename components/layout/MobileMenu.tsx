@@ -1,5 +1,6 @@
 "use client";
 
+import { getLenis } from "@/lib/smoothScroll";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { AnimatePresence, motion } from "motion/react";
@@ -23,6 +24,7 @@ export function MobileMenu({ open, onClose, pathname }: { open: boolean; onClose
     if (!open) return;
     const prevOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
+    getLenis()?.stop();
     const previouslyFocused = document.activeElement as HTMLElement | null;
     panelRef.current?.querySelector<HTMLElement>("button, a")?.focus();
 
@@ -44,6 +46,7 @@ export function MobileMenu({ open, onClose, pathname }: { open: boolean; onClose
     window.addEventListener("keydown", onKey);
     return () => {
       document.body.style.overflow = prevOverflow;
+      getLenis()?.start();
       window.removeEventListener("keydown", onKey);
       previouslyFocused?.focus();
     };
@@ -58,13 +61,16 @@ export function MobileMenu({ open, onClose, pathname }: { open: boolean; onClose
           role="dialog"
           aria-modal="true"
           aria-label="Site menu"
+          data-lenis-prevent
           className="fixed inset-0 z-[60] flex flex-col overflow-y-auto bg-abyss text-white xl:hidden"
           initial={{ clipPath: "circle(0% at calc(100% - 2.75rem) 2.5rem)" }}
           animate={{ clipPath: "circle(150% at calc(100% - 2.75rem) 2.5rem)" }}
           exit={{ clipPath: "circle(0% at calc(100% - 2.75rem) 2.5rem)" }}
           transition={{ duration: 0.7, ease: EASE }}
         >
-          <div aria-hidden className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgb(8_126_139/0.45),transparent_60%)]" />
+          <div aria-hidden className="pointer-events-none absolute -right-32 -top-32 size-[30rem] rounded-full bg-violet/40 orb-soft" />
+          <div aria-hidden className="pointer-events-none absolute -bottom-40 -left-20 size-[28rem] rounded-full bg-ocean/35 orb-soft" />
+          <div aria-hidden className="tech-grid pointer-events-none absolute inset-0 opacity-40" />
           <Bubbles count={10} />
 
           <div className="container-x relative flex items-center justify-between py-5">

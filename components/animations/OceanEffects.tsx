@@ -54,11 +54,11 @@ const RAYS = [
 /** Soft, slowly swaying shafts of light from the surface. */
 export function LightRays({ className }: { className?: string }) {
   return (
-    <div aria-hidden className={cn("pointer-events-none absolute inset-0 overflow-hidden mix-blend-screen", className)}>
+    <div aria-hidden className={cn("pointer-events-none absolute inset-0 overflow-hidden", className)}>
       {RAYS.map((r, i) => (
         <span
           key={i}
-          className="absolute -top-[10%] h-[120%] origin-top animate-sway blur-2xl"
+          className="absolute -top-[10%] h-[120%] origin-top animate-sway will-change-transform [mask-image:linear-gradient(90deg,transparent,#000_40%,#000_60%,transparent)]"
           style={
             {
               left: r.left,
@@ -72,32 +72,5 @@ export function LightRays({ className }: { className?: string }) {
         />
       ))}
     </div>
-  );
-}
-
-/** Organic wave edge used to transition between sections. */
-export function WaveEdge({
-  className,
-  fill = "currentColor",
-  flip = false,
-}: {
-  className?: string;
-  fill?: string;
-  flip?: boolean;
-}) {
-  return (
-    <svg
-      aria-hidden
-      viewBox="0 0 1440 120"
-      preserveAspectRatio="none"
-      className={cn("pointer-events-none block h-[60px] w-full sm:h-[90px]", flip && "rotate-180", className)}
-    >
-      <path
-        fill={fill}
-        d="M0 64c96-20 192-44 320-38 140 7 220 52 360 54 150 2 230-46 380-54 144-8 260 30 380 50v44H0z"
-        opacity="0.35"
-      />
-      <path fill={fill} d="M0 86c120-26 230-40 360-28 136 12 220 46 360 46s240-40 380-46c130-6 240 16 340 30v32H0z" />
-    </svg>
   );
 }

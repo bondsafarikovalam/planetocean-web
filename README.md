@@ -2,7 +2,7 @@
 
 The CSR wing of the Bond Group of Companies · Kovalam, Thiruvananthapuram, Kerala.
 
-Built with Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS 4, Motion and Lucide.
+Built with Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS 4, Motion, GSAP ScrollTrigger and Lucide.
 
 ## Run
 
@@ -32,6 +32,18 @@ depend on an ESM-only `magic-string`, which needs Node ≥ 22.12. Upgrade Tailwi
 | Taglines, descriptions, SEO defaults | `lib/site.ts` |
 
 Programme content is approved source copy. Don't shorten, renumber or merge it.
+
+## Design system & motion
+
+- **Tokens** live in `app/globals.css` (`@theme`): Abyss, Deep Atlantic, Electric Ocean, Glacial Cyan,
+  Bioluminescent Aqua, Deep Violet, Coral, Pearl, Soft Mist, plus per-world backgrounds (`bg-world-*`).
+- **Motion helpers** in `components/animations/`: `TextReveal`/`ScrollWords` (masked + scroll-lit type),
+  `Parallax`/`ParallaxFrame` (depth layers), `Tilt`/`Magnetic` (pointer interactions), `Reveal`/`MaskReveal`.
+- **GSAP** is used only for the two pinned sequences: the horizontal *Four Ocean Worlds* (`OceanWorlds.tsx`)
+  and the home *Landmark Events* stage (`LandmarkEvents.tsx`).
+- Heavy effects (pinning, parallax, tilt, magnetic) run only on large screens with a fine pointer and
+  no reduced-motion preference (`lib/useMedia.ts`); elsewhere layouts fall back to stacked panels.
+- The side "depth gauge" was removed on request; only the thin top progress bar remains.
 
 ## Photography
 

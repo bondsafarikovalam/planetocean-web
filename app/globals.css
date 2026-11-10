@@ -1,34 +1,64 @@
 @import "tailwindcss";
 
-/* ───────────────────────────── Design tokens ───────────────────────────── */
+/* ═══════════════════════ THE OCEAN, REIMAGINED — design tokens ═══════════════════════ */
 @theme {
-  --color-abyss: #061f2b;
-  --color-midnight: #082d3b;
-  --color-deep: #0b3a4a;
-  --color-teal: #087e8b;
-  --color-teal-ink: #066a75; /* teal for small text on light bg (AA) */
-  --color-aqua: #42d6c4;
-  --color-seafoam: #b8eee5;
-  --color-mist: #f7faf9;
-  --color-sand: #eae5d9;
-  --color-sand-deep: #d9d1bf;
-  --color-ink: #0c2530;
-  --color-ink-soft: #3f5862;
+  /* Core palette */
+  --color-abyss: #03151d;        /* Abyss Black */
+  --color-atlantic: #062c40;     /* Deep Atlantic */
+  --color-ocean: #0878e8;        /* Electric Ocean Blue */
+  --color-cyan: #42e8e0;         /* Glacial Cyan */
+  --color-biolum: #8afff0;       /* Bioluminescent Aqua */
+  --color-violet: #635bdb;       /* Deep Violet */
+  --color-coral: #ff806c;        /* Coral Accent */
+  --color-pearl: #f5fafa;        /* Pearl White */
+  --color-softmist: #eaf4f5;     /* Soft Mist */
+
+  /* Derived / accessible variants */
+  --color-ocean-ink: #0560c2;    /* ocean blue for small text on light (AA) */
+  --color-violet-ink: #4a42c4;
+  --color-coral-ink: #c4442f;
+  --color-trench: #021017;
+  --color-ink: #071c26;
+  --color-ink-soft: #46606b;
+
+  /* Legacy aliases (keep older components on-palette) */
+  --color-midnight: #062c40;
+  --color-deep: #0a3a55;
+  --color-teal: #0878e8;
+  --color-teal-ink: #0560c2;
+  --color-aqua: #42e8e0;
+  --color-seafoam: #8afff0;
+  --color-mist: #f5fafa;
+  --color-sand: #eaf4f5;
+
+  /* Form tokens (enquiry form) mapped onto this palette */
+  --color-brand: #0560c2;
+  --color-brand-dark: #062c40;
+  --color-muted: #46606b;
+  --color-line: #d5e4e8;
+  --color-tint: #eaf4f5;
+  --color-gold: #42e8e0;
 
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-manrope), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-jakarta), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-jakarta), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-mono-face), ui-monospace, monospace;
   --font-ml: var(--font-malayalam), var(--font-inter), sans-serif;
 
   --ease-tide: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-swell: cubic-bezier(0.65, 0, 0.35, 1);
 
-  --animate-drift: drift 18s ease-in-out infinite alternate;
+  --animate-drift: drift 22s ease-in-out infinite alternate;
   --animate-rise: rise linear infinite;
   --animate-sway: sway 14s ease-in-out infinite alternate;
-  --animate-caustic: caustic 22s linear infinite;
+  --animate-orb: orb 26s ease-in-out infinite alternate;
+  --animate-sonar: sonar 4.5s var(--ease-tide) infinite;
+  --animate-sweep: sweep 8s linear infinite;
+  --animate-marquee: marquee 40s linear infinite;
 
   @keyframes drift {
-    from { transform: translate3d(-2%, 0, 0) scale(1.05); }
-    to { transform: translate3d(2%, -1.5%, 0) scale(1.08); }
+    from { transform: translate3d(-1.5%, 0, 0) scale(1.06); }
+    to { transform: translate3d(1.5%, -1.5%, 0) scale(1.1); }
   }
   @keyframes rise {
     0% { transform: translate3d(0, 0, 0); opacity: 0; }
@@ -37,51 +67,73 @@
     100% { transform: translate3d(var(--dx, 10px), -110vh, 0); opacity: 0; }
   }
   @keyframes sway {
-    from { transform: rotate(var(--r, -12deg)) translateX(-4%); opacity: 0.35; }
+    from { transform: rotate(var(--r, -12deg)) translateX(-4%); opacity: 0.3; }
     to { transform: rotate(calc(var(--r, -12deg) + 5deg)) translateX(4%); opacity: 0.75; }
+  }
+  @keyframes caustic-a {
+    to { transform: translate3d(400px, 300px, 0); }
+  }
+  @keyframes caustic-b {
+    to { transform: translate3d(-520px, 360px, 0); }
+  }
+  @keyframes orb {
+    0% { transform: translate3d(0, 0, 0) scale(1); }
+    50% { transform: translate3d(6%, -8%, 0) scale(1.12); }
+    100% { transform: translate3d(-6%, 6%, 0) scale(0.94); }
+  }
+  @keyframes sonar {
+    0% { transform: scale(0.2); opacity: 0.9; }
+    100% { transform: scale(1); opacity: 0; }
+  }
+  @keyframes sweep {
+    to { transform: rotate(360deg); }
+  }
+  @keyframes marquee {
+    to { transform: translateX(-50%); }
+  }
+  @keyframes curtain {
+    from { transform: scaleY(1); }
+    to { transform: scaleY(0); }
   }
   @keyframes scrollcue {
     0% { transform: translateY(-100%); }
     100% { transform: translateY(200%); }
   }
-  @keyframes caustic {
-    from { background-position: 0 0, 0 0; }
-    to { background-position: 400px 200px, -300px 300px; }
-  }
 }
 
-/* ───────────────────────────── Base ───────────────────────────── */
+/* ═══════════════════════ Base ═══════════════════════ */
 @layer base {
   html {
-    scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
+    scroll-padding-top: 6rem;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    html { scroll-behavior: smooth; }
   }
   body {
-    background: var(--color-mist);
+    background: var(--color-pearl);
     color: var(--color-ink);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: clip;
-    text-rendering: optimizeLegibility;
   }
   h1, h2, h3, h4 {
     font-family: var(--font-display);
-    letter-spacing: -0.025em;
+    letter-spacing: -0.03em;
     text-wrap: balance;
   }
   p { text-wrap: pretty; }
-  ::selection { background: var(--color-aqua); color: var(--color-abyss); }
+  ::selection { background: var(--color-cyan); color: var(--color-abyss); }
   :focus-visible {
-    outline: 2px solid var(--color-aqua);
+    outline: 2px solid var(--color-cyan);
     outline-offset: 3px;
-    border-radius: 6px;
+    border-radius: 8px;
   }
   [lang="ml"] { font-family: var(--font-ml); letter-spacing: 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
   *, *::before, *::after {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
@@ -90,64 +142,61 @@
   .motion-hide { display: none !important; }
 }
 
-/* ───────────────────────────── Utilities ───────────────────────────── */
+/* ═══════════════════════ Utilities ═══════════════════════ */
 @utility container-x {
   width: 100%;
-  max-width: 88rem;
+  max-width: 92rem;
   margin-inline: auto;
   padding-inline: 1.25rem;
   @media (width >= 40rem) { padding-inline: 2rem; }
-  @media (width >= 64rem) { padding-inline: 3rem; }
+  @media (width >= 64rem) { padding-inline: 3.5rem; }
 }
 
+/* Telemetry-style label */
 @utility eyebrow {
-  font-family: var(--font-display);
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.22em;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
 }
 
+@utility display-2xl {
+  font-size: clamp(3.1rem, 10.5vw, 11.5rem);
+  line-height: 0.88;
+  font-weight: 800;
+  letter-spacing: -0.055em;
+}
 @utility display-xl {
-  font-size: clamp(2.75rem, 7.4vw, 7rem);
-  line-height: 0.98;
-  font-weight: 700;
-  letter-spacing: -0.04em;
+  font-size: clamp(2.8rem, 7.6vw, 7.75rem);
+  line-height: 0.92;
+  font-weight: 800;
+  letter-spacing: -0.05em;
 }
 @utility display-lg {
-  font-size: clamp(2.25rem, 5vw, 4.5rem);
-  line-height: 1.02;
+  font-size: clamp(2.3rem, 5.2vw, 5rem);
+  line-height: 0.98;
+  font-weight: 800;
+  letter-spacing: -0.045em;
+}
+@utility display-md {
+  font-size: clamp(1.8rem, 3.3vw, 3rem);
+  line-height: 1.04;
   font-weight: 700;
   letter-spacing: -0.035em;
 }
-@utility display-md {
-  font-size: clamp(1.75rem, 3.2vw, 2.75rem);
-  line-height: 1.08;
-  font-weight: 700;
-  letter-spacing: -0.03em;
-}
 
-/* Animated underwater caustic shimmer overlay */
-@utility caustics {
-  background-image:
-    radial-gradient(ellipse 120px 60px at 20% 30%, rgb(184 238 229 / 0.10), transparent 70%),
-    radial-gradient(ellipse 160px 80px at 70% 60%, rgb(66 214 196 / 0.08), transparent 70%);
-  background-size: 400px 300px, 520px 360px;
-  animation: var(--animate-caustic);
+@utility text-gradient-cyan {
+  background: linear-gradient(100deg, var(--color-biolum) 0%, var(--color-cyan) 40%, #6fb8ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
-
-/* Fine grain to add a printed/editorial texture over gradients */
-@utility grain {
-  position: relative;
-  &::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    opacity: 0.06;
-    mix-blend-mode: overlay;
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
-  }
+@utility text-gradient-ocean {
+  background: linear-gradient(100deg, var(--color-ocean) 0%, var(--color-violet) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 @utility text-outline {
@@ -155,28 +204,100 @@
   -webkit-text-stroke: 1px currentColor;
 }
 
-/* Animated link underline */
+/* Drifting caustic light. The pattern lives on oversized pseudo-elements that move
+   by transform (GPU-composited) instead of animating background-position (repaints). */
+@utility caustics {
+  overflow: hidden;
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    inset: -360px -520px 0 0;
+    pointer-events: none;
+    will-change: transform;
+  }
+  &::before {
+    background: radial-gradient(ellipse 120px 60px at 20% 30%, rgb(138 255 240 / 0.09), transparent 70%) 0 0 / 400px 300px;
+    animation: caustic-a 22s linear infinite;
+  }
+  &::after {
+    inset: -360px 0 0 -520px;
+    background: radial-gradient(ellipse 160px 80px at 70% 60%, rgb(66 232 224 / 0.07), transparent 70%) 0 0 / 520px 360px;
+    animation: caustic-b 22s linear infinite;
+  }
+}
+
+/* Soft glow orb: a radial mask on the coloured circle replaces a 100px+ blur filter,
+   which is very expensive to rasterise (and re-rasterise while animating). */
+@utility orb-soft {
+  -webkit-mask-image: radial-gradient(closest-side, #000 0%, rgb(0 0 0 / 0.55) 45%, transparent 100%);
+  mask-image: radial-gradient(closest-side, #000 0%, rgb(0 0 0 / 0.55) 45%, transparent 100%);
+  will-change: transform;
+}
+
+@utility grain {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.07;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+}
+
+/* Fine technical grid, used on dark "instrument" panels */
+@utility tech-grid {
+  background-image:
+    linear-gradient(rgb(138 255 240 / 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(138 255 240 / 0.06) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
 @utility link-underline {
   background-image: linear-gradient(currentColor, currentColor);
   background-size: 0% 1px;
   background-repeat: no-repeat;
   background-position: 0 100%;
-  transition: background-size 0.45s var(--ease-tide);
+  transition: background-size 0.5s var(--ease-tide);
   &:hover, &:focus-visible { background-size: 100% 1px; }
 }
 
-/* Gradient "depth" backgrounds used for category identities */
-@utility bg-depth-shore {
-  background: linear-gradient(160deg, #f4efe4 0%, #eae5d9 55%, #dfe9e2 100%);
+/* Animated gradient border for highlighted elements */
+@utility glow-border {
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    padding: 1px;
+    border-radius: inherit;
+    background: linear-gradient(135deg, rgb(66 232 224 / 0.6), rgb(99 91 219 / 0.25) 40%, transparent 60%, rgb(8 120 232 / 0.5));
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
 }
-@utility bg-depth-surface {
-  background: linear-gradient(160deg, #e3f7f2 0%, #b8eee5 60%, #8fdcd0 100%);
+
+/* Environment backgrounds — one per ocean world */
+@utility bg-world-shore {
+  background: radial-gradient(120% 90% at 85% 0%, #ffe3d6 0%, transparent 55%),
+    linear-gradient(170deg, #f5fafa 0%, #eaf4f5 60%, #dff0f2 100%);
 }
-@utility bg-depth-reef {
-  background: linear-gradient(160deg, #0a6f7b 0%, #087e8b 45%, #0b4f5e 100%);
+@utility bg-world-surface {
+  background: radial-gradient(110% 80% at 10% 0%, #c9fff7 0%, transparent 55%),
+    linear-gradient(170deg, #e4fbf9 0%, #b9f2ee 55%, #8fe3e4 100%);
 }
-@utility bg-depth-blue {
-  background: linear-gradient(160deg, #0b3a4a 0%, #082d3b 50%, #061f2b 100%);
+@utility bg-world-reef {
+  background: radial-gradient(100% 80% at 90% 10%, rgb(66 232 224 / 0.35) 0%, transparent 55%),
+    linear-gradient(170deg, #0878e8 0%, #0757a8 50%, #062c40 100%);
+}
+@utility bg-world-blue {
+  background: radial-gradient(90% 70% at 15% 10%, rgb(99 91 219 / 0.55) 0%, transparent 60%),
+    linear-gradient(170deg, #062c40 0%, #041f2e 50%, #03151d 100%);
 }
 
 @utility scrollbar-none {

@@ -11,15 +11,7 @@ export interface FilterOption {
 }
 
 /** Category filter with an animated active indicator. */
-export function ProgrammeFilters({
-  options,
-  value,
-  onChange,
-}: {
-  options: FilterOption[];
-  value: string;
-  onChange: (id: string) => void;
-}) {
+export function ProgrammeFilters({ options, value, onChange }: { options: FilterOption[]; value: string; onChange: (id: string) => void }) {
   return (
     <div
       role="group"
@@ -41,21 +33,10 @@ export function ProgrammeFilters({
             )}
           >
             {active && (
-              <motion.span
-                layoutId="programme-filter"
-                className="absolute inset-0 -z-0 rounded-full bg-abyss"
-                transition={{ type: "spring", stiffness: 420, damping: 36 }}
-              />
+              <motion.span layoutId="programme-filter" className="absolute inset-0 -z-0 rounded-full bg-abyss" transition={{ type: "spring", stiffness: 420, damping: 36 }} />
             )}
             <span className="relative">{o.label}</span>
-            <span
-              className={cn(
-                "relative rounded-full px-1.5 py-0.5 text-[0.7rem] tabular-nums",
-                active ? "bg-aqua text-abyss" : "bg-ink/5 text-ink-soft",
-              )}
-            >
-              {o.count}
-            </span>
+            <span className={cn("relative rounded-full px-1.5 py-0.5 text-[0.7rem] tabular-nums", active ? "bg-aqua text-abyss" : "bg-ink/5 text-ink-soft")}>{o.count}</span>
           </button>
         );
       })}

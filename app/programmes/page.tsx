@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/sections/PageHero";
-import { ProgrammeGrid } from "@/components/programmes/ProgrammeGrid";
+import { ProgrammeDirectory } from "@/components/programmes/ProgrammeDirectory";
 import { FinalCTA } from "@/components/sections/FinalCTA";
 import { categories, programmes, programmesIn, type CategoryId } from "@/data/programmes";
 
@@ -22,27 +22,31 @@ export default async function ProgrammesPage({ searchParams }: Props) {
   return (
     <>
       <PageHero
+        index="P"
         eyebrow={`${programmes.length} active programmes`}
         title="Programmes, by where the work happens."
+        accent={["where", "the", "work", "happens."]}
+        ghost="Depth"
         intro="Our work spans the shoreline, the surface, the seabed and the wider blue economy."
         image="/images/programmes-hero.jpg"
+        next="pearl"
+        tint="violet"
       >
-        <ol className="mt-12 grid max-w-4xl grid-cols-2 gap-px overflow-hidden rounded-2xl bg-white/10 md:grid-cols-4">
+        <ol className="mt-12 grid max-w-4xl grid-cols-2 gap-2 md:grid-cols-4">
           {categories.map((c) => (
-            <li key={c.id} className="bg-abyss/50 p-4 backdrop-blur-md">
-              <p className="font-display text-lg font-bold">{c.filterLabel}</p>
-              {c.id !== "blue" && <p className="text-xs text-seafoam/75">{c.depth}</p>}
-              <p className="mt-2 text-xs text-white/50">{programmesIn(c.id).length} programmes</p>
+            <li key={c.id} className="rounded-2xl bg-white/[0.06] p-4 ring-1 ring-white/10 backdrop-blur-md">
+              <p className="font-mono text-[0.62rem] uppercase tracking-[0.18em] text-cyan">0{c.index}</p>
+              <p className="mt-2 font-display text-lg font-bold leading-tight">{c.filterLabel}</p>
+              {c.id !== "blue" && <p className="text-xs text-white/60">{c.depth}</p>}
+              <p className="mt-2 font-mono text-[0.62rem] uppercase tracking-[0.16em] text-white/45">{programmesIn(c.id).length} programmes</p>
             </li>
           ))}
         </ol>
       </PageHero>
 
-      <section aria-label="Programme directory" className="bg-mist pb-28 pt-10 md:pb-36">
-        <div className="container-x">
-          <ProgrammeGrid key={initial} initialFilter={initial} />
-        </div>
-      </section>
+      <div className="bg-pearl pt-6">
+        <ProgrammeDirectory key={initial} initialFilter={initial} />
+      </div>
 
       <FinalCTA title="Want to support a programme?" cta="Start a Conversation" />
     </>

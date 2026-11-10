@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { PageHero } from "@/components/sections/PageHero";
 import { EnquiryForm } from "@/components/forms/EnquiryForm";
@@ -18,61 +19,74 @@ export default function ContactPage() {
   return (
     <>
       <PageHero
+        index="C"
         eyebrow="Contact"
         title="Start a conversation."
+        accent={["conversation."]}
+        ghost="Hello"
         intro="Volunteering, CSR partnerships, school sessions or a question about a programme — send us a message."
         image="/images/about-coast.jpg"
+        next="softmist"
+        tint="violet"
       />
 
-      <section aria-labelledby="contact-form-title" className="bg-mist py-16 md:py-28">
-        <div className="container-x grid gap-12 lg:grid-cols-12 lg:gap-16">
-          <div className="space-y-10 lg:col-span-4">
-            <Reveal>
-              <h2 id="contact-form-title" className="display-md text-ink">
-                Planet Ocean Foundation
-              </h2>
-              <p className="mt-3 text-ink-soft">{site.descriptor}.</p>
-            </Reveal>
+      <section aria-labelledby="contact-form-title" className="bg-softmist px-3 pb-6 pt-10 sm:px-5 md:pt-16">
+        <div className="mx-auto grid max-w-[92rem] gap-4 lg:grid-cols-12">
+          <div className="grain relative overflow-hidden rounded-[2.5rem] bg-abyss p-8 text-white sm:p-12 lg:col-span-5">
+            <Image src="/images/cat-blue.jpg" alt="" fill sizes="40vw" className="object-cover opacity-25" />
+            <div aria-hidden className="absolute -bottom-32 -left-32 size-[30rem] animate-orb rounded-full bg-violet/40 orb-soft" />
+            <div aria-hidden className="tech-grid absolute inset-0 opacity-40" />
+            <div className="relative">
+              <Reveal>
+                <p className="eyebrow text-cyan">Planet Ocean Foundation</p>
+                <h2 id="contact-form-title" className="display-md mt-5">
+                  {site.descriptor}.
+                </h2>
+              </Reveal>
 
-            <RevealGroup as="ul" className="space-y-4">
-              <RevealItem as="li" className="flex gap-4 rounded-2xl bg-white p-5 ring-1 ring-ink/5">
-                <MapPin className="mt-0.5 size-5 shrink-0 text-teal" aria-hidden />
-                <div>
-                  <p className="font-semibold text-ink">Base</p>
-                  <address className="not-italic text-ink-soft">Kovalam, Thiruvananthapuram, Kerala</address>
-                </div>
-              </RevealItem>
-              <RevealItem as="li" className="flex gap-4 rounded-2xl bg-white p-5 ring-1 ring-ink/5">
-                <Mail className="mt-0.5 size-5 shrink-0 text-teal" aria-hidden />
-                <div>
-                  <p className="font-semibold text-ink">Email</p>
-                  <p className="text-ink-soft">To be published</p>
-                </div>
-              </RevealItem>
-              <RevealItem as="li" className="flex gap-4 rounded-2xl bg-white p-5 ring-1 ring-ink/5">
-                <Phone className="mt-0.5 size-5 shrink-0 text-teal" aria-hidden />
-                <div>
-                  <p className="font-semibold text-ink">Phone</p>
-                  <p className="text-ink-soft">To be published</p>
-                </div>
-              </RevealItem>
-            </RevealGroup>
+              <RevealGroup as="ul" className="mt-12 space-y-3">
+                <RevealItem as="li" className="flex gap-4 rounded-2xl bg-white/[0.06] p-5 ring-1 ring-white/10 backdrop-blur-md">
+                  <MapPin className="mt-0.5 size-5 shrink-0 text-coral" aria-hidden />
+                  <div>
+                    <p className="font-mono text-[0.65rem] uppercase tracking-[0.18em] text-white/55">Base</p>
+                    <address className="mt-1 not-italic text-white">Kovalam, Thiruvananthapuram, Kerala</address>
+                  </div>
+                </RevealItem>
+                <RevealItem as="li" className="flex gap-4 rounded-2xl bg-white/[0.06] p-5 ring-1 ring-white/10 backdrop-blur-md">
+                  <Mail className="mt-0.5 size-5 shrink-0 text-cyan" aria-hidden />
+                  <div>
+                    <p className="font-mono text-[0.65rem] uppercase tracking-[0.18em] text-white/55">Email</p>
+                    <p className="mt-1 text-white/80">To be published</p>
+                  </div>
+                </RevealItem>
+                <RevealItem as="li" className="flex gap-4 rounded-2xl bg-white/[0.06] p-5 ring-1 ring-white/10 backdrop-blur-md">
+                  <Phone className="mt-0.5 size-5 shrink-0 text-cyan" aria-hidden />
+                  <div>
+                    <p className="font-mono text-[0.65rem] uppercase tracking-[0.18em] text-white/55">Phone</p>
+                    <p className="mt-1 text-white/80">To be published</p>
+                  </div>
+                </RevealItem>
+              </RevealGroup>
 
-            <Reveal>
-              <h3 className="eyebrow text-teal-ink">Operating waters</h3>
-              <ul className="mt-4 divide-y divide-ink/10 border-y border-ink/10">
-                {operatingWaters.map((w) => (
-                  <li key={w.name} className="flex items-baseline justify-between gap-4 py-3">
-                    <span className="font-display text-lg font-bold text-ink">{w.name}</span>
-                    <span className="text-sm text-ink-soft">{w.region}</span>
-                  </li>
-                ))}
-              </ul>
-            </Reveal>
+              <Reveal className="mt-12">
+                <h3 className="eyebrow text-white/55">Operating waters</h3>
+                <ul className="mt-4 divide-y divide-white/10 border-y border-white/10">
+                  {operatingWaters.map((w) => (
+                    <li key={w.name} className="flex items-baseline justify-between gap-4 py-4">
+                      <span className="font-display text-2xl font-bold">{w.name}</span>
+                      <span className="font-mono text-xs uppercase tracking-[0.14em] text-white/55">{w.region}</span>
+                    </li>
+                  ))}
+                </ul>
+                <p lang="ml" className="mt-8 text-lg text-biolum">
+                  {site.taglineMl}
+                </p>
+              </Reveal>
+            </div>
           </div>
 
-          <div className="lg:col-span-8">
-            <EnquiryForm />
+          <div className="lg:col-span-7">
+            <EnquiryForm className="h-full rounded-[2.5rem]" />
           </div>
         </div>
       </section>
