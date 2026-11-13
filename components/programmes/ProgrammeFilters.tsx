@@ -11,11 +11,23 @@ export interface FilterOption {
 }
 
 /** Category filter with an animated active indicator. */
-export function ProgrammeFilters({ options, value, onChange }: { options: FilterOption[]; value: string; onChange: (id: string) => void }) {
+export function ProgrammeFilters({
+  options,
+  value,
+  onChange,
+  label = "Filter programmes by category",
+  layoutId = "programme-filter",
+}: {
+  options: FilterOption[];
+  value: string;
+  onChange: (id: string) => void;
+  label?: string;
+  layoutId?: string;
+}) {
   return (
     <div
       role="group"
-      aria-label="Filter programmes by category"
+      aria-label={label}
       className="scrollbar-none -mx-5 flex gap-1.5 overflow-x-auto px-5 sm:mx-0 sm:inline-flex sm:flex-wrap sm:rounded-full sm:bg-white sm:p-1.5 sm:shadow-[0_10px_40px_-20px_rgb(6_31_43/0.35)] sm:ring-1 sm:ring-ink/5"
     >
       {options.map((o) => {
@@ -33,7 +45,7 @@ export function ProgrammeFilters({ options, value, onChange }: { options: Filter
             )}
           >
             {active && (
-              <motion.span layoutId="programme-filter" className="absolute inset-0 -z-0 rounded-full bg-abyss" transition={{ type: "spring", stiffness: 420, damping: 36 }} />
+              <motion.span layoutId={layoutId} className="absolute inset-0 -z-0 rounded-full bg-abyss" transition={{ type: "spring", stiffness: 420, damping: 36 }} />
             )}
             <span className="relative">{o.label}</span>
             <span className={cn("relative rounded-full px-1.5 py-0.5 text-[0.7rem] tabular-nums", active ? "bg-aqua text-abyss" : "bg-ink/5 text-ink-soft")}>{o.count}</span>

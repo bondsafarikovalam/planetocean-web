@@ -5,6 +5,7 @@ import { useRef } from "react";
 import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
 import { Bubbles, LightRays } from "@/components/animations/OceanEffects";
 import { TextReveal } from "@/components/animations/TextReveal";
+import { BackLink } from "@/components/ui/BackLink";
 import { cn } from "@/lib/utils";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -21,6 +22,8 @@ interface PageHeroProps {
   /** Colour of the section that follows (the surface edge blends into it). */
   next?: "pearl" | "abyss" | "softmist";
   tint?: "ocean" | "violet" | "coral";
+  /** Optional back button shown above the eyebrow row. */
+  back?: { href: string; label: string };
   children?: React.ReactNode;
 }
 
@@ -28,7 +31,7 @@ const nextFill = { pearl: "var(--color-pearl)", abyss: "var(--color-abyss)", sof
 const tints = { ocean: "bg-ocean/40", violet: "bg-violet/45", coral: "bg-coral/30" };
 
 /** Cinematic, layered header for inner pages. */
-export function PageHero({ index, eyebrow, title, accent = [], ghost, intro, image, imagePosition, next = "pearl", tint = "ocean", children }: PageHeroProps) {
+export function PageHero({ index, eyebrow, title, accent = [], ghost, intro, image, imagePosition, next = "pearl", tint = "ocean", back, children }: PageHeroProps) {
   const ref = useRef<HTMLElement>(null);
   const reduce = useReducedMotion();
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
@@ -60,6 +63,16 @@ export function PageHero({ index, eyebrow, title, accent = [], ghost, intro, ima
       )}
 
       <motion.div style={{ y: contentY, opacity: fade }} className="container-x relative w-full pb-32 pt-32 md:pb-32">
+        {back && (
+          <motion.div
+            className="mb-8"
+            initial={{ opacity: 0, x: -16 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1, ease: EASE, delay: 0.4 }}
+          >
+            <BackLink href={back.href}>{back.label}</BackLink>
+          </motion.div>
+        )}
         <motion.div
           className="mb-10 flex items-center justify-between border-b border-white/15 pb-5 font-mono text-[0.68rem] uppercase tracking-[0.2em] text-white/60"
           initial={{ opacity: 0, y: -10 }}
