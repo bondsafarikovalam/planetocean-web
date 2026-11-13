@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ArrowUpRight, Clock } from "lucide-react";
+import { ArrowUpRight, Clock } from "lucide-react";
 import { blogPosts, formatDate, postBySlug, relatedPosts, topicLabel } from "@/data/blog";
 import { programmes } from "@/data/programmes";
 import { PageHero } from "@/components/sections/PageHero";
@@ -10,6 +10,7 @@ import { ArticleBody } from "@/components/blog/ArticleBody";
 import { BlogCard, topicChip } from "@/components/blog/BlogCard";
 import { Reveal, RevealGroup, RevealItem } from "@/components/animations/Reveal";
 import { TextReveal } from "@/components/animations/TextReveal";
+import { BackLink } from "@/components/ui/BackLink";
 import { cn } from "@/lib/utils";
 
 type Params = { params: Promise<{ slug: string }> };
@@ -51,6 +52,7 @@ export default async function BlogPostPage({ params }: Params) {
         image={post.image}
         tint={tintFor[post.topic]}
         intro={post.excerpt}
+        back={{ href: "/blog", label: "All stories" }}
       >
         <div className="mt-8 flex flex-wrap items-center gap-3 font-mono text-[0.7rem] uppercase tracking-[0.16em] text-white/70">
           <span className={cn("rounded-full px-3 py-1 text-[0.65rem]", topicChip[post.topic])}>{topicLabel[post.topic]}</span>
@@ -65,15 +67,12 @@ export default async function BlogPostPage({ params }: Params) {
       <section aria-label="Article" className="relative overflow-hidden bg-pearl py-16 md:py-24">
         <div aria-hidden className="absolute -right-40 top-40 size-[36rem] rounded-full bg-cyan/15 orb-soft" />
         <div className="container-x relative grid gap-12 lg:grid-cols-12">
-          <aside className="lg:col-span-3">
+          <aside className="hidden lg:col-span-3 lg:block">
             <div className="space-y-8 lg:sticky lg:top-28">
-              <Link href="/blog" className="group inline-flex items-center gap-2 font-mono text-[0.7rem] uppercase tracking-[0.18em] text-ink-soft transition-colors hover:text-ink">
-                <span className="inline-flex size-8 items-center justify-center rounded-full bg-white ring-1 ring-ink/10 transition-transform duration-500 ease-tide group-hover:-translate-x-1">
-                  <ArrowLeft className="size-4" aria-hidden />
-                </span>
+              <BackLink href="/blog" tone="dark">
                 All stories
-              </Link>
-              <dl className="hidden space-y-5 border-t border-ink/10 pt-6 font-mono text-[0.7rem] uppercase tracking-[0.16em] lg:block">
+              </BackLink>
+              <dl className="space-y-5 border-t border-ink/10 pt-6 font-mono text-[0.7rem] uppercase tracking-[0.16em]">
                 <div>
                   <dt className="text-ink-soft/70">Topic</dt>
                   <dd className="mt-1 text-ink">{topicLabel[post.topic]}</dd>
@@ -113,6 +112,15 @@ export default async function BlogPostPage({ params }: Params) {
                 </ul>
               </Reveal>
             )}
+
+            <Reveal className="mt-14 flex flex-wrap items-center justify-between gap-4 border-t border-ink/10 pt-8">
+              <BackLink href="/blog" tone="dark">
+                Back to all stories
+              </BackLink>
+              <span className="font-mono text-[0.68rem] uppercase tracking-[0.18em] text-ink-soft">
+                {topicLabel[post.topic]} · {post.readMinutes} min read
+              </span>
+            </Reveal>
           </article>
         </div>
       </section>
