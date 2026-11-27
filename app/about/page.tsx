@@ -7,6 +7,7 @@ import { AboutStrands, type Strand } from "@/components/sections/AboutStrands";
 import { Reveal, RevealGroup, RevealItem } from "@/components/animations/Reveal";
 import { ScrollWords, TextReveal } from "@/components/animations/TextReveal";
 import { ButtonLink } from "@/components/ui/Button";
+import { LoadingImage } from "@/components/ui/LoadingImage";
 import { categories, programmes, programmesIn } from "@/data/programmes";
 import { operatingWaters } from "@/data/navigation";
 import { site } from "@/lib/site";
@@ -119,6 +120,22 @@ export default function AboutPage() {
               </p>
             </Reveal>
           </div>
+          <Reveal className="mt-16 md:mt-20">
+            <figure className="mx-auto max-w-5xl">
+              <div className="relative aspect-[3/2] overflow-hidden rounded-[2.5rem] ring-1 ring-ink/10">
+                <LoadingImage
+                  src="/images/about-world-oceans-day-2018.jpg"
+                  alt="A group on stage jointly holds a framed Planet Ocean Foundation logo in front of an Ocean Love banner for World Oceans Day 2018"
+                  fill
+                  sizes="(min-width: 1100px) 1024px, 100vw"
+                  className="object-cover"
+                />
+              </div>
+              <figcaption className="mt-4 text-center font-mono text-xs uppercase tracking-[0.16em] text-ink-soft">
+                Planet Ocean Foundation logo at the Ocean Love World Oceans Day Ocean Conference · 8 June 2018
+              </figcaption>
+            </figure>
+          </Reveal>
         </div>
       </section>
 
