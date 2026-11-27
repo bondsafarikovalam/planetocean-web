@@ -1,6 +1,9 @@
 # Image credits
 
-All photographs are sourced from Unsplash (https://unsplash.com) under the Unsplash License
+Real photography (not from Unsplash): `about-world-oceans-day-2018.jpg`, supplied for this site
+(World Oceans Day 2018 Ocean Conference, 8 June).
+
+The photographs listed in the table below are sourced from Unsplash (https://unsplash.com) under the Unsplash License
 and are used as **representative imagery only**. They do not document Planet Ocean Foundation
 activities or events. Replace them with the Foundation's own photography when available
 (keep the same file names, or update paths in `data/*.ts`).
